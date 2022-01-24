@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registrazione</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
+        <link rel="shortcut icon" href="../../img/logo_small_icon_only.ico">
+        <link rel="stylesheet" href="../../css/style.css">
+    </head>
+    <body>
+        <form method="post" action="../php/register.php">
+            <h1>Registrazione</h1>
+            <input type="text" id="nomecompleto" placeholder="Nome completo" name="nomecompleto" maxlength="50" required>
+            <input type="text" id="nick" placeholder="Nickname" name="nick" maxlength="50" required>
+            <input type="password" id="pw" placeholder="Password" name="pw" required>
+            <button type="submit" name="register">Registrati</button>
+        </form>
+    </body>
+</html>
