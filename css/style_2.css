@@ -1,8 +1,15 @@
 html,body {
-    padding: 0;
+    /*padding: 0;
     margin: 0;
     font: 14px 'Open sans', sans-serif;
     color: #333;
+    background-image: url("bg_index.png") !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-position: center !important;*/
+}
+body{
+    background: linear-gradient(180deg, #0047AB, #adcfff);
 }
 h1 {
     margin: 0;
@@ -33,4 +40,7 @@ button {
     border: none;
     margin-top: 10px;
 	  text-transform: uppercase;
+}
+header{
+  height: 100%;
 }
