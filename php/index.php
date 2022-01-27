@@ -1,7 +1,7 @@
 <?php
-//session_start();
+session_start();
 require_once('config.php');
-//if(isset($_SESSION['session_id'])){
+if(isset($_SESSION['session_id'])){
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +51,7 @@ require_once('config.php');
           </div>
           <div class="col-1">
             <!-- Qua ci sarà la foto profilo -->
+            <a href="../access/php/logout.php"></a>
           </div>
         </div>
       </div>
@@ -105,5 +106,7 @@ require_once('config.php');
   </body>
 </html>
 <?php
-//}
+} else {
+  header('Location: ../access/html/login_form.php');
+}
  ?>
