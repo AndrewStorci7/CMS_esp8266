@@ -43,7 +43,7 @@ if (isset($_POST['register'])) {
         $error4 = '<p class="error">La password deve essere di almeno 8 caratteri</p>';
         header('Location: ../html/register_form.php');
     } else {
-        $password_hash = md5(md5($password));
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $query = "
             SELECT id
