@@ -80,6 +80,15 @@ p {
   background-repeat: no-repear;
   background-size: cover;
 }
+.loginCss{
+  color: #85e59c !important;
+}
+.logoutCss{
+  color: #ff664e !important;
+}
+.registerCss{
+  color: #4082dd !important;
+}
 .banner {
   display: flex;
   align-items: center;
