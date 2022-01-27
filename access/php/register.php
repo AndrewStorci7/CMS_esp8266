@@ -22,31 +22,31 @@ if (isset($_POST['register'])) {
         ]
     );*/
     $pwdLenght = mb_strlen($password);
-    
+
     if (empty($nick) || empty($password)) {
         $msg = 'Compila tutti i campi %s';
     } elseif (false === $isNickValid) {
-        $msg = 'Lo username non è valido. Sono ammessi solamente caratteri 
+        $msg = 'Lo username non è valido. Sono ammessi solamente caratteri
                 alfanumerici e l\'underscore. Lunghezza minina 3 caratteri.
                 Lunghezza massima 20 caratteri';
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
         $msg = 'Lunghezza minima password 8 caratteri.
                 Lunghezza massima 20 caratteri';
     } else {
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $password_hash = md5(md5($password));
 
         $query = "
             SELECT id
             FROM utenti
             WHERE nick = :nick
         ";
-        
+
         $check = $pdo->prepare($query);
         $check->bindParam(':nick', $nick, PDO::PARAM_STR);
         $check->execute();
-        
+
         $user = $check->fetchAll(PDO::FETCH_ASSOC);
-        
+
         if (count($user) > 0) {
             $msg = 'Nickname già in uso %s';
         } else {
@@ -54,13 +54,13 @@ if (isset($_POST['register'])) {
                 INSERT INTO utenti(nick, pw, nc)
                 VALUES (:nick, :pw, :nomecompleto)
             ";
-        
+
             $check = $pdo->prepare($query);
             $check->bindParam(':nick', $nick, PDO::PARAM_STR);
             $check->bindParam(':pw', $password_hash, PDO::PARAM_STR);
             $check->bindParam(':nomecompleto', $nc, PDO::PARAM_STR);
             $check->execute();
-            
+
             if ($check->rowCount() > 0) {
                 $msg = 'Registrazione eseguita con successo';
             } else {
@@ -68,7 +68,7 @@ if (isset($_POST['register'])) {
             }
         }
     }
-    
+
     printf($msg, '<a href="../html/register.html">torna indietro</a>');
 }
 
