@@ -5,7 +5,24 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var ctx = $('#myChart');
 var ctx = 'myChart';
 
-
+$.ajax({
+  // definisco il tipo della chiamata
+  type: "GET",
+  // specifico la URL della risorsa da contattare
+  url: "../php/API/api.php",
+  // passo dei dati alla risorsa remota
+  data: "temp=" + temp + "&id_d=" + id_d,
+  // definisco il formato della risposta
+  dataType: "html",
+  // imposto un'azione per il caso di successo
+  success: function(risposta){
+    $("div#risposta").html(risposta);
+  },
+  // ed una per il caso di fallimento
+  error: function(){
+    alert("Chiamata fallita!!!");
+  }
+}
 
 var myChart = new Chart(ctx, {
     type: 'bar',
