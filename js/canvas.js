@@ -5,13 +5,15 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var ctx = $('#myChart');
 var ctx = 'myChart';
 
+
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: , // inserire le date
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'line',
+            data: , // inserire i dati delle temperature
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
