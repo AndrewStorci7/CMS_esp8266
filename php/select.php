@@ -36,15 +36,25 @@ $query = ('SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
             FROM dati
             JOIN dispositivi
             JOIN utenti
-            ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC; ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare);
+            ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare) . ';';
 $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
 
+$num_elementi = $pdo->query($conta_elementi);
+$num_elementi->execute();
+$riga = $num_elementi->fetch(PDO::FETCH_ASSOC);
+$num_pagine = $riga['num_dati'] / $elementi_da_stampare;
+
+$res = $pdo->query($query);
+$res->execute();
+$risultato = $res->fetch(PDO::FETCH_ASSOC);
+
+/*
 $num_elementi = $pdo->query($conta_elementi);
 $riga = $num_elementi->fetch_assoc();
 $num_pagine = $riga['num_dati'] / $elementi_da_stampare;
 $risultato = $pdo->query($query);
-
-if($risultato!== false && $risultato->num_rows >= 0){
+*/
+if($risultato!== false && $risultato > 0){
     echo '<div>
             <table>
               <tr>
