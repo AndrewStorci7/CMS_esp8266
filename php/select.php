@@ -65,10 +65,7 @@ const myChart = new Chart(ctx, {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: 'Temperatura',
-            data: [12, 19, 3, 5, 2, 3],";
-
-
-            echo "
+            data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -107,7 +104,7 @@ const myChart = new Chart(ctx, {
                 <th>Data e ora</th>
               </tr>';
 
-    /*while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
+    while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
         $index++;
         $temp = $risultato['temp'];
         $n_disp = $risultato['n_disp'];
@@ -121,7 +118,7 @@ const myChart = new Chart(ctx, {
         <td>' . $nick . '</td>
         <td>' . $data_time . '</td>
         </tr>';
-    }*/
+    }
 echo '</table></div></div>';
 echo '<div class="pagine">';
 
