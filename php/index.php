@@ -102,7 +102,9 @@ if(isset($_SESSION['session_id'])){
       </main>
 
     <main>
-
+      <?php
+        include_once('select.php');
+       ?>
     </main>
 
   </body>
