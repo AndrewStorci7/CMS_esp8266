@@ -36,22 +36,24 @@ if(isset($_SESSION['session_id'])){
       <div class="container-fluid">
         <div class="row">
           <div class="col-3">
-            <a href="#" class="navbar-brand titoloHeader">Pannello</a>
+            <h3 class="navbar-brand titoloHeader" style="color: #442AF5 !important;">Pannello</h3>
           </div>
           <div class="col-5">
             <!-- ricerca -->
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <a href="#"></a>
+                <form class="d-flex formSearchPannel">
+                  <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                  <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
+                  <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
                 </form>
           </div>
           <div class="col-3">
             <!-- mini menu per logout, o per tornare al menu -->
+
           </div>
           <div class="col-1">
             <!-- Qua ci sarà la foto profilo -->
-            <a href="../access/php/logout.php"></a>
+            <a href="../access/php/logout.php">Logout</a>
           </div>
         </div>
       </div>

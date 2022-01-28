@@ -121,6 +121,8 @@ p {
   font-family: 'Lobster', cursive;
   font-size: 2.5rem;
   padding-left: 100px;
+  text-decoration: none;
+  color: white;
 }
 .navbar .navbar-toggler {
   position: relative !important;
