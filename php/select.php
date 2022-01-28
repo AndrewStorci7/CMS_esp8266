@@ -65,12 +65,11 @@ if($risultato!== false && $risultato > 0){
                 <th>Data e ora</th>
               </tr>';
     $index = 0;
-    while($row_record = mysqli_fetch_assoc($risultato)){
-        $index++;
-        $temp = $row_record['temp'];
-        $n_disp = $row_record['n_disp'];
-        $nick = $row_record['nick'];
-        $data_time = $row_record['data_time'];
+    for($index; $index >= $risultato; $index++){        
+        $temp = $risultato['temp'];
+        $n_disp = $risultato['n_disp'];
+        $nick = $risultato['nick'];
+        $data_time = $risultato['data_time'];
 
         echo '<tr>
         <td>'. $index . '</td>
