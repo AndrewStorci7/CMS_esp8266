@@ -5,7 +5,7 @@ require_once('../config.php');
         $result2 = $pdo->prepare($select_query);
         $result2->execute();
 
-        while($matrice = $result2->fetch(PDO::FETCH_ASSOC)){
+        while($matrice = $result2->fetchAll(PDO::FETCH_DEFAULT)){
         if($matrice !== null){
             $json = json_encode($matrice);
             echo $json;

@@ -15,18 +15,16 @@
 
 // VANNO USATI OBBLIGATORIAMENTE PER POTER UTILIZZARE chart.js
 // MODIFICARE IL NOME DELL'ID NEL CASO DI UN'ALTRO CANVAS
-
-const ore = new Array();
-const temperature = new Array();
-
+const ore = [];
+const temperature = [];
 getData();
 getChart();
 
 async function getChart(){
-  //await getData();
+  await getData();
   const ctx = document.getElementById('myChart');
   const myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
           labels: ore,//[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24], inserire le date
           datasets: [{
@@ -61,19 +59,16 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
 
-    console.log(resp);
-    //const table = resp.split('\n').slice(2);
+
+    //const tabella = table.split('\n').slice(4);
     table.forEach(row => {
-        const col = row.split(',');
-        const hour = col['temp'][1];
+        const hour = row['data_time'];
         //const hour = col[1];
-        ore.push(Date.parse(hour).toString());
-        const temp = col['data_time'][0];
+        ore.push(Date.parse(hour));
+        const temp = row['temp'];
         //const temp = col[0];
         temperature.push(temp);
-
-        console.log('s');
         console.log(temp, hour);
-        console.log(temperature, ore);
     });
+    console.log(temperature, ore);
 }
