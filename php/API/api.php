@@ -13,7 +13,7 @@ if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") |
     echo "<br>Campi vuoti";
 } else {
     $result = $pdo->prepare($insert_query);
-    $result->bindParam(':temp', $temperatura);
+    //$result->bindParam(':temp', $temperatura);
     $result->bindParam(':id_d', $id_d, PDO::PARAM_INT);
     $result->execute();
     //$matrice = $result->fetchAll(PDO::FETCH_DEFAULT);
