@@ -23,12 +23,13 @@ if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") |
         $result2 = $pdo->prepare($select_query);
         $result2->execute();
 
-        $matrice = $result2->fetch(PDO::FETCH_ASSOC);
-        if($matrice > 0){
+        while($matrice = $result2->fetch(PDO::FETCH_ASSOC)){
+        if($matrice !== null){
             $json = json_encode($matrice);
-            $file = file_put_contents("data.json", $json);
-        } else
-            echo 'non c\'è nulla da aggiungere';
+            echo $json;
+            //$file = file_put_contents("data.json", $json);
+        }
+      }
     } else {
         echo "<br>Query non eseguita <br>";
     }
