@@ -17,7 +17,7 @@ getData();
 // MODIFICARE IL NOME DELL'ID NEL CASO DI UN'ALTRO CANVAS
 const ctx = document.getElementById('myChart');
 
-const ore = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+const ore = [];
 const temperature = [];
 
 
@@ -57,13 +57,17 @@ const myChart = new Chart(ctx, {
 });
 
 async function getData(){
-    const req = await fetch('../php/API/api.php');
+    const req = await fetch('../php/API/data.json');
     const resp = await req.text();
 
     const table = resp.split('\n').slice(1);
     table.forEach(row => {
         const col = row.split(',');
+        const hour = col[0];
+        ore.push(hour);
         const temp = col[1];
-        console.log(temp);
+        temperature.push(temp);
+
+        console.log(temp, ore);
     })
 }
