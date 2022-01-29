@@ -13,13 +13,13 @@ if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") |
     echo "<br>Campi vuoti";
 } else {
     $result = $pdo->prepare($insert_query);
-    $result->bindParam(':temp', $temperatura);
+    $result->bindParam(':temp', $temperatura, PDO::PARAM_STR);
     $result->bindParam(':id_d', $id_d, PDO::PARAM_INT);
     $result->execute();
     //$matrice = $result->fetchAll(PDO::FETCH_DEFAULT);
     $risultato = $result->fetchAll();
     if($risultato > 0){
-        $select_query = "SELECT * FROM dati WHERE id_d = :id_d AND temp = :temp";
+        $select_query = "SELECT temp, data_time FROM dati WHERE id_d = :id_d AND temp = :temp";
         $result2 = $pdo->prepare($select_query);
         $result2->bindParam(':temp', $temperatura, PDO::PARAM_STR);
         $result2->bindParam(':id_d', $id_d, PDO::PARAM_INT);
