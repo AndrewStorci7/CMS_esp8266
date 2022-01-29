@@ -2,7 +2,7 @@
 require_once('../config.php');
 
 date_default_timezone_set('Europe/Rome');
-$dataTime_invio = date('Y-m-d h:i:s', time());
+$dataTime_invio = date('Y-m-d H:i:s', time());
 
 $temperatura = isset($_GET['temp']) ? $_GET['temp'] : '';
 $id_d = isset($_GET['id_d']) ? $_GET['id_d'] : '';
@@ -13,19 +13,17 @@ if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") |
     echo "<br>Campi vuoti";
 } else {
     $result = $pdo->prepare($insert_query);
-    $result->bindParam(':temp', $temperatura, PDO::PARAM_STR);
+    $result->bindParam(':temp', $temperatura);
     $result->bindParam(':id_d', $id_d, PDO::PARAM_INT);
     $result->execute();
     //$matrice = $result->fetchAll(PDO::FETCH_DEFAULT);
     $risultato = $result->fetchAll();
     if($risultato > 0){
-        $select_query = "SELECT temp, data_time FROM dati WHERE id_d = :id_d AND temp = :temp";
+        $select_query = "SELECT temp, data_time FROM dati JOIN dispositivi ON dati.id_d = dispositivi.id_disp";
         $result2 = $pdo->prepare($select_query);
-        $result2->bindParam(':temp', $temperatura, PDO::PARAM_STR);
-        $result2->bindParam(':id_d', $id_d, PDO::PARAM_INT);
         $result2->execute();
 
-        $matrice = $result2->fetchAll();
+        $matrice = $result2->fetch(PDO::FETCH_ASSOC);
         if($matrice > 0){
             $json = json_encode($matrice);
             $file = file_put_contents("data.json", $json);

@@ -15,7 +15,7 @@ if(isset($_SESSION['session_id'])){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="ESP8266, esp, esp8266, arduino, CMS, pannell, pannello di controllo, control pannell, ARDUINO, WiFi, wifi, Project, progetto, scuola, school">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/logo_small_icon_only.ico">
+    <link rel="shortcut icon" href="../img/logo_small_icon_only.ico">
     <!--<link rel="stylesheet" href="cssFontawesome/all.css">-->
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
