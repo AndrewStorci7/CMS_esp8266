@@ -58,9 +58,11 @@ async function getChart(){
 async function getData(){
     const req = await fetch('../php/API/selectData.php');
     const resp = await req.text();
+    JSON.stringify(resp);
+    const table = JSON.parse(resp);
 
     console.log(resp);
-    const table = resp.split('\n').slice(2);
+    //const table = resp.split('\n').slice(2);
     table.forEach(row => {
         const col = row.split(',');
         const hour = col['temp'][1];
