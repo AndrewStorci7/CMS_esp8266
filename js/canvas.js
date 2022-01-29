@@ -1,36 +1,33 @@
+getData();
+/*function ajaxApi(){
+    const req = new XMLHttpRequest();
+
+    req.open('GET', '../php/API/api.php', true);
+    req.send();
+
+    req.onreadystatechange = function(){
+      if(this.readyState === 4 && this.status === 200){
+          console.log(this.responseText);
+      }
+    }
+}*/
+
+
 // VANNO USATI OBBLIGATORIAMENTE PER POTER UTILIZZARE chart.js
 // MODIFICARE IL NOME DELL'ID NEL CASO DI UN'ALTRO CANVAS
-var ctx = document.getElementById('myChart');
-var ctx = document.getElementById('myChart').getContext('2d');
-var ctx = $('#myChart');
-var ctx = 'myChart';
+const ctx = document.getElementById('myChart');
 
-$.ajax({
-  // definisco il tipo della chiamata
-  type: "GET",
-  // specifico la URL della risorsa da contattare
-  url: "../php/API/api.php",
-  // passo dei dati alla risorsa remota
-  data: "temp=" + temp + "&id_d=" + id_d,
-  // definisco il formato della risposta
-  dataType: "html",
-  // imposto un'azione per il caso di successo
-  success: function(risposta){
-    $("div#risposta").html(risposta);
-  },
-  // ed una per il caso di fallimento
-  error: function(){
-    alert("Chiamata fallita!!!");
-  }
-}
+const ore = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+const temperature = [];
 
-var myChart = new Chart(ctx, {
-    type: 'bar',
+
+const myChart = new Chart(ctx, {
+    type: 'line',
     data: {
-        labels: , // inserire le date
+        labels: ore, // inserire le date
         datasets: [{
-            label: 'line',
-            data: , // inserire i dati delle temperature
+            label: 'Temperature registrate nell\'ultimo periodo',
+            data: temperature, // inserire i dati delle temperature
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -53,8 +50,20 @@ var myChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: false
             }
         }
     }
 });
+
+async function getData(){
+    const req = await fetch('../php/API/api.php');
+    const resp = await req.text();
+
+    const table = resp.split('\n').slice(1);
+    table.forEach(row => {
+        const col = row.split(',');
+        const temp = col[1];
+        console.log(temp);
+    })
+}

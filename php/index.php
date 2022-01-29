@@ -31,80 +31,81 @@ if(isset($_SESSION['session_id'])){
   </head>
   <body>
 
-    <header>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-3">
-            <h3 class="navbar-brand titoloHeader" style="color: #442AF5 !important;">Pannello</h3>
+    <main style="height:auto;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100% !important; position: fixed; z-index:9999 ;">
+            <h3 class="navbar-brand titoloHeader" style="color: #0D6EFD !important; ">Pannello</h3>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <i class="far fa-chart-bar"></i>
+                  Datas
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <i class="fas fa-cog"></i>
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <i class="fas fa-chart-line"></i>
+                  Users datas
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <!-- INSERIRE LA FOTO PROFILO DELL'UTENTE -->
+                  Profile
+                </a>
+              </li>
+            </ul>
+            <hr>
+            <div class="copyright">
+              <center><p style="font-size: 10px;">Made by @Andrea Storci, 2022</p></center>
+            </div>
           </div>
-          <div class="col-5">
-            <!-- ricerca -->
-                <form class="d-flex formSearchPannel">
-                  <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
-                  <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
-                  <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
-                </form>
-          </div>
-          <div class="col-3">
-            <!-- mini menu per logout, o per tornare al menu -->
-
-          </div>
-          <div class="col-1">
-            <!-- Qua ci sarà la foto profilo -->
-            <a href="../access/php/logout.php">Logout</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-          <hr>
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                Orders
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                Customers
-              </a>
-            </li>
-          </ul>
-          <hr>
-          <div class="copyright">
-            <center><p style="font-size: 10px;">Made by @Andrea Storci, 2022</p></center>
-          </div>
-        </div>
       </main>
+      <header>
+        <div class="container-fluid bg-dark" style="position: fixed !important; padding: 10px;">
+          <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-5">
+              <!-- ricerca -->
+                  <form class="d-flex formSearchPannel">
+                    <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                    <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
+                    <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
+                  </form>
+            </div>
+            <div class="col-3">
+              <!-- mini menu per logout, o per tornare al menu -->
 
-    <main>
+            </div>
+            <div class="col-1">
+              <!-- Qua ci sarà la foto profilo -->
+              <a href="../access/php/logout.php">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="modificaFix">
       <?php
         include_once('select.php');
        ?>
-    </main>
+      </section>
+
+      <script src='../js/canvas.js' type='text/javascript'></script>
 
   </body>
 </html>

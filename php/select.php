@@ -31,7 +31,7 @@ if($nomecercato!=''){
 }*/
 
 
-$elementi_da_stampare = 10;
+$elementi_da_stampare = 20;
 $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
             FROM dati
             JOIN dispositivi
@@ -57,17 +57,21 @@ $risultato = $pdo->query($query);
 $index = 0;
 if($res->rowCount() > 0){
     echo "
-    <div class='container' style='width: 400 !important; height: 400 !important;'><canvas id='myChart'></canvas></div>
-    <script src='../js/canvas.js' type='text/javascript'></script>";
-    echo '<div>
-            <table>
+    <div class='row' style='width: 90% !important; height: auto !important;'>
+      <center>
+        <canvas id='myChart'></canvas>
+      </center>
+    </div>
+    <div class='row' style='margin-top: 40px; margin-right: 10%;'>
+      <div class='container'>
+            <table id='tabelladati' class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
               <tr>
                 <th>#</th>
                 <th>Temperatura</th>
                 <th>Nome disp</th>
                 <th>Nickname User</th>
                 <th>Data e ora</th>
-              </tr>';
+              </tr>";
 
     while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
         $index++;
@@ -84,16 +88,15 @@ if($res->rowCount() > 0){
         <td>' . $data_time . '</td>
         </tr>';
     }
-echo '</table></div></div>';
-echo '<div class="pagine">';
-
-    if($num_pagine > $pagina){
-        echo '<br><p><center> <a class="piu" href="?pagina='. ($pagina+1) . '">Pagina successiva '.($pagina+1).'>> </a> </center></p>';
-    }
+    echo '</table></div></div>';
+    echo '<div class="row pagine"><br><center>';
 
     if($pagina > 1){
-       echo '<br><p><center><a class="meno" href="?pagina='. ($pagina-1) . '"> << '.($pagina-1).' Pagina precedente </a></center></p>';
+      echo ' <a class="meno" href="?pagina='. ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
+    }
+    if($num_pagine > $pagina){
+        echo '<a class="piu" href="?pagina='. ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
     }
 }
-echo '</div>';
+echo '</center><br></div>';
 ?>

@@ -1,13 +1,5 @@
 <?php
-$host = "127.0.0.1";
-$user_db = "root";
-$pw_db = "";
-$db_name = "as_proj_esp8266";
-$conn = new mysqli($host, $user_db, $pw_db, $db_name);
-if($conn->connect_errno) {
-    echo "Connessione fallita: " . $conn->connect_errno;
-    exit();
-}
+require_once('../config.php');
 
 date_default_timezone_set('Europe/Rome');
 $dataTime_invio = date('Y-m-d h:i:s', time());
@@ -17,25 +9,28 @@ $temperatura = isset($_GET['temp']) ? $_GET['temp'] : '';
 $id_d = isset($_GET['id_d']) ? $_GET['id_d'] : '';
 
 //echo "<br>" . $temperatura . " " . $id_d;
-$id_d_cast = intval($id_d);
-$temp_cast = floatval($temperatura);
+//$id_d_cast = intval($id_d);
+//$temp_cast = floatval($temperatura);
 //echo "<br>" . $temp_cast . " " . $id_d_cast;
 
-$insert_query = "INSERT INTO dati(temp, id_d, data_time) VALUES($temp_cast, $id_d_cast, '$dataTime_invio')";
+$insert_query = "INSERT INTO dati(temp, id_d, data_time) VALUES( :temp, :id_d, '$dataTime_invio')";
 //echo "<br>" . $insert_query;
 
 if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") || ($id_d == null || $id_d == 'undefined' || $id_d == "")){
     echo "<br>Campi vuoti";
 } else {
-    if($id_d_cast !== 0 || ($temp_cast == 0 && ($_GET['temp'] !== '0' || $_GET['temp'] !== '0.0'))){
-        $result = $conn->query($insert_query);
-        if($result->num_rows > 0 && $result !== false){
-            echo "<br>Query eseguita<br>";
-        } else {
-            echo "<br>Query non eseguita <br>";
-        }
-        //echo $insert_query;
-        //echo "<br>" . $result;
+    $result = $pdo->prepare($insert_query);
+    $result->bindParam(':temp', $temperatura, PDO::PARAM_STR);
+    $result->bindParam(':id_d', $id_d, PDO::PARAM_INT);
+    $result->execute();
+    //$matrice = $result->fetchAll(PDO::FETCH_DEFAULT);
+    $matrice = $result->fetchAll();
+    if($matrice > 0){
+        $json = json_encode($matrice);
+        $file = file_put_contents("data.json", $json);
+        //echo $file;
+    } else {
+        echo "<br>Query non eseguita <br>";
     }
 }
 

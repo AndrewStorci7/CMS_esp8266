@@ -19,7 +19,17 @@ main {
   overflow-x: auto;
   overflow-y: hidden;
 }
-
+main i{
+  width: 30px;
+  height: auto;
+}
+main h3{
+  margin-bottom: -12px;
+}
+.modificaFix{
+  margin-left: 17%;
+  margin-top: 6%;
+}
 .b-example-divider {
   flex-shrink: 0;
   width: 1.5rem;
