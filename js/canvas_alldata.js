@@ -47,7 +47,7 @@ async function getChart(){
 }
 
 async function getData(){
-    const req = await fetch('../php/API/selectData.php');
+    const req = await fetch('../php/API/selectAllData.php');
     const resp = await req.text();
     JSON.stringify(resp);
     const table = JSON.parse(resp);
