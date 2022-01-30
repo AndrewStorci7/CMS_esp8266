@@ -2,7 +2,7 @@
 require_once('../config.php');
 
 date_default_timezone_set('Europe/Rome');
-$dataTime_invio = date('d-m-Y H:i:s', time());
+$dataTime_invio = date('Y-m-d H:i:s', time());
 
 $temperatura = isset($_GET['temp']) ? $_GET['temp'] : '';
 $id_d = isset($_GET['id_d']) ? $_GET['id_d'] : '';

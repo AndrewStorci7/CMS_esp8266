@@ -43,6 +43,7 @@ if (isset($_POST['login'])) {
             $_SESSION['session_id'] = session_id();
             $_SESSION['session_user'] = $user['nick'];
 
+
             header('Location: ../../php/index.php');
             exit;
         }

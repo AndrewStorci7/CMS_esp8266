@@ -17,6 +17,7 @@
 // MODIFICARE IL NOME DELL'ID NEL CASO DI UN'ALTRO CANVAS
 const ore = [];
 const temperature = [];
+var data_ora = new Date();
 getData();
 getChart();
 
@@ -24,7 +25,7 @@ async function getChart(){
   await getData();
   const ctx = document.getElementById('myChart');
   const myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
           labels: ore,//[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24], inserire le date
           datasets: [{
@@ -47,9 +48,49 @@ async function getChart(){
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'*/
                 ],
-                borderWidth: 1
+                borderWidth: 1,
           }]
+      },
+      options: {
+        scales: {
+              y: {
+                min: -50,
+                max: 50,
+              }
+            }
       }
+      /*options: {
+        animation,
+        interaction: {
+            intersect: false
+        },
+        plugins: {
+            legend: false,
+            title: {
+                display: true,
+                text: () => easing.name
+            }
+        },
+        scale : {
+          x: {
+            type: 'time',
+            time: {
+              // Luxon format string
+              tooltipFormat: 'DD T'
+            },
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'value'
+            }
+          }
+        }
+      }*/
   });
 }
 
@@ -59,14 +100,13 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
 
-
     //const tabella = table.split('\n').slice(4);
     table.forEach(row => {
         const hour = row['data_time'];
-        //const hour = col[1];
-        ore.push(Date.parse(hour));
+        // il Data.parse lo userò per dividere la data dal orario
+        //ore.push(new Date(hour));
+        ore.push(hour);
         const temp = row['temp'];
-        //const temp = col[0];
         temperature.push(temp);
         console.log(temp, hour);
     });
