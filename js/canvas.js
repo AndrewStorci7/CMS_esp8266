@@ -1,4 +1,3 @@
-
 /*function ajaxApi(){
     const req = new XMLHttpRequest();
 
@@ -99,7 +98,6 @@ async function getData(){
     const resp = await req.text();
     JSON.stringify(resp);
     const table = JSON.parse(resp);
-
     //const tabella = table.split('\n').slice(4);
     table.forEach(row => {
         const hour = row['data_time'];

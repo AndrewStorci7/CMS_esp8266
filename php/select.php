@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
 
@@ -37,7 +38,7 @@ $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
             FROM dati
             JOIN dispositivi
             JOIN utenti
-            ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
+            ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . '" ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
 $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
 
 $num_elementi = $pdo->prepare($conta_elementi);
