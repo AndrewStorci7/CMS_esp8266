@@ -32,8 +32,9 @@ if(isset($_SESSION['session_id'])){
   <body>
 
     <main style="height:auto;">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100% !important; position: fixed; z-index:9999 ;">
-            <h3 class="navbar-brand titoloHeader" style="color: #0D6EFD !important; ">Pannello</h3>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100% !important; position: fixed; z-index:9998 ;">
+            <br>
+            <br>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
@@ -74,26 +75,27 @@ if(isset($_SESSION['session_id'])){
           </div>
       </main>
       <header>
-        <div class="container-fluid bg-dark" style="position: fixed !important; padding: 10px;">
+        <div class="container-fluid bg-dark" style="position: fixed !important; padding: 10px; z-index: 9999">
           <div class="row">
-            <div class="col-3">
+            <div class="col-2">
+              <h3 class="navbar-brand titoloHeader" style="color: #0D6EFD !important; ">Pannello</h3>
             </div>
-            <div class="col-5">
+            <div class="col-9">
               <!-- ricerca -->
+              <div class="container">
                   <form class="d-flex formSearchPannel">
                     <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                     <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
                     <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
                   </form>
-            </div>
-            <div class="col-3">
-              <!-- mini menu per logout, o per tornare al menu -->
-
+              </div>
             </div>
             <div class="col-1">
               <!-- Qua ci sarà la foto profilo -->
-              <a href="../access/php/logout.php">Logout</a>
+              <button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
             </div>
           </div>
         </div>
