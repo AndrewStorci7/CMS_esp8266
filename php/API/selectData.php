@@ -6,12 +6,12 @@ require_once('../config.php');
         $result2->execute();
 
         while($matrice = $result2->fetchAll(PDO::FETCH_DEFAULT)){
-        if($matrice !== null){
-            $json = json_encode($matrice);
-            echo $json;
-            //$file = file_put_contents("data.json", $json);
+          if($matrice !== null){
+              $json = json_encode($matrice);
+              echo $json;
+              //$file = file_put_contents("data.json", $json);
+          }
         }
-      }
 
 
 ?>
