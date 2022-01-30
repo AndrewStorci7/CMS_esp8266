@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+if(isset($_SESSION['session_id'])){
 
 if(isset($_GET['pagina'])) {
     $pagina=$_GET['pagina'];
@@ -99,4 +100,8 @@ if($res->rowCount() > 0){
     }
 }
 echo '</center><br></div>';
+} else {
+  header("Location: ../access/php/login.php");
+}
+
 ?>
