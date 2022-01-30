@@ -11,9 +11,9 @@ if($conn->connect_errno)
 $config = [
     'db_engine' => 'mysql',
     'db_host' => '127.0.0.1',
-    'db_name' => 'my_cmsandrew',
-    'db_user' => 'cmsandrew',
-    'db_password' => 'p9PHf4ra28D2',
+    'db_name' => 'my_nftandrew',
+    'db_user' => 'root',
+    'db_password' => '',
 ];
 
 $db_config = $config['db_engine'] . ":host=".$config['db_host'] . ";dbname=" . $config['db_name'];
