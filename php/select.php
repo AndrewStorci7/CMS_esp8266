@@ -1,9 +1,10 @@
 <?php
 require_once('config.php');
+if(isset($_SESSION['session_id'])){
 
-if(isset($_GET['pagina'])){//controllo se esiste un numero di pagina
-    $pagina=$_GET['pagina'];//in caso non esista la pagina viene settata a 1
-}else{
+if(isset($_GET['pagina'])) {
+    $pagina=$_GET['pagina'];
+} else {
     $pagina=1;
 }
 
@@ -99,4 +100,8 @@ if($res->rowCount() > 0){
     }
 }
 echo '</center><br></div>';
+} else {
+  header("Location: ../access/php/login.php");
+}
+
 ?>
