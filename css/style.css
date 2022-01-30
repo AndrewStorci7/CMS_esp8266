@@ -1,36 +1,56 @@
-html,body {
-    padding: 0;
-    margin: 0;
-    font: 14px 'Open sans', sans-serif;
-    color: #333;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Rock+3D&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&family=Rock+3D&display=swap');
+
+body {
+  background: linear-gradient(to bottom right, #0047AB, #adcfff);
 }
-h1 {
-    margin: 0;
-    margin-bottom: 20px;
-	font-size: 24px;
+.copyright{
+	padding-left: 5%;
 }
-form {
-    padding: 40px;
-    background: #DDD;
-    border: 4px solid #AAA;
-    width: 360px;
-    margin: 30px auto;
+.menuFooter{
+	padding-right: 5%;
 }
-input {
-	font: 14px 'Open Sans', sans-serif;
-    border: 2px solid #ccc;
-    padding: 6px;
-    display: block;
-	margin-bottom: 10px;
-    width: 96%;
+#logoFooter{
+	width: 12%;
+	height: 12%;
 }
-button {
-    font: 14px 'Open Sans', sans-serif;
-    background-color: #4285f4;
-    color: white;
-    padding: 6px;
-    cursor: pointer;
-    border: none;
-    margin-top: 10px;
-	text-transform: uppercase;
+.persone{
+	background-color: white !important;
+	border-radius: 6px;
+	height: 400px;
+  width: 50%;
+	margin-bottom: 40px;
+  font-family: 'Poppins', sans-serif;
 }
+
+.persone h1{
+  font-family: 'Rock 3D', cursive !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+.persone p{
+  padding-top: 15px !important;
+  padding: 7px;
+}
+
+.section1{
+  height: 200px;
+  background-color: white ;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  width: 50%;
+}
+
+#s1{
+  border-radius: 7px 7px 0 7px;
+}
+#s2{
+  border-radius: 7px 7px 7px 0;
+}
+/*
+.persone:hover{
+  box-shadow: 10px 10px 5px #aaaaaa;
+  margin: 30px auto 40 30px;
+  transition: margin 0.7s linear, box-shadow 0.7s linear;
+}*/
