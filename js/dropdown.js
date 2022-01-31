@@ -1,5 +1,9 @@
-$("#menu_side").click(function(){
-  $('.menu-icon-bar').addClass('first');
-  $('.menu-icon-bar:first-child').addClass('second');
-  $('.menu-icon-bar:last-child').addClass('third');
-});
+$('#see_graph').click(function(){
+  if(('#tabella').is(":visible")){
+    $('#see_graph').hide();
+    $('#tabella').show();
+  } else if (('#see_graph').is(":visible")) {
+    $('#see_graph').show();
+    $('#tabella').hide();
+  }
+})

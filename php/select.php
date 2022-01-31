@@ -59,12 +59,12 @@ if(isset($_SESSION['session_id'])){
   $index = 0;
   if($res->rowCount() > 0){
       echo "
-      <div class='row' style='width: 90% !important; height: auto !important;'>
+      <div id='grafico' class='row' style='width: 90% !important; height: auto !important;'>
         <center>
           <canvas id='myChart'></canvas>
         </center>
       </div>
-      <div class='row' style='margin-top: 40px; margin-right: 10%;'>
+      <div id='tabella' class='row' style='margin-top: 40px; margin-right: 10%;'>
         <div class='container'>
               <table id='tabelladati' class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
                 <tr>

@@ -96,6 +96,9 @@ if(isset($_SESSION['session_id'])){
               <button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
                 <i class="fas fa-sign-out-alt"></i>
               </button>
+              <button type="button" name="see_graph" id="see_graph">
+                Vedi grafico
+              </button>
             </div>
           </div>
         </div>
