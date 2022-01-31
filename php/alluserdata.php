@@ -61,7 +61,7 @@ if(isset($_SESSION['session_id'])){
       echo "
       <div class='row' style='width: 90% !important; height: auto !important;'>
         <center>
-          <canvas id='myChart'></canvas>
+          <canvas id='myChartAllData'></canvas>
         </center>
       </div>
       <div class='row' style='margin-top: 40px; margin-right: 10%;'>

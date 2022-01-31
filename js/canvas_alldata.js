@@ -6,7 +6,7 @@ getChart();
 
 async function getChart(){
   await getData();
-  const ctx = document.getElementById('myChart');
+  const ctx = document.getElementById('myChartAllData');
   const myChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -51,8 +51,16 @@ async function getData(){
     const resp = await req.text();
     JSON.stringify(resp);
     const table = JSON.parse(resp);
-    //const tabella = table.split('\n').slice(4);
-    table.forEach(row => {
+
+    const alluserdata = table.datasets;
+    console.log(alluserdata);
+
+    /*table.forEach(row => {
+        const id = row['id_d'];
+        if(row['id_d'] != id){
+
+        }
+
         const hour = row['data_time'];
         // il Data.parse lo userò per dividere la data dal orario
         //ore.push(new Date(hour));
@@ -60,6 +68,6 @@ async function getData(){
         const temp = row['temp'];
         temperature.push(temp);
         console.log(temp, hour);
-    });
-    console.log(temperature, ore);
+    });*/
+    //console.log(temperature, ore);
 }

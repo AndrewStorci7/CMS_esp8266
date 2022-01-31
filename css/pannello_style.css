@@ -1,3 +1,9 @@
 .formSearchPannel{
   margini-top: -10px !important;
 }
+.nascondi{
+  display: none !important;
+}
+.mostra{
+  display: block !important;
+}

@@ -28,6 +28,7 @@ if(isset($_SESSION['session_id'])){
     <script type="text/javascript" src="../js/script.js"></script>
     <script type="text/javascript" src="../js/dropdown.js"></script>
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
+    <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
   <body>
 
@@ -38,7 +39,7 @@ if(isset($_SESSION['session_id'])){
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="?link=userdata" class="nav-link active" aria-current="page">
                   <i class="fas fa-home"></i>
                   Home
                 </a>
@@ -56,7 +57,7 @@ if(isset($_SESSION['session_id'])){
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="?link=alluserdata" class="nav-link text-white">
                   <i class="fas fa-chart-line"></i>
                   Users datas
                 </a>
@@ -96,7 +97,7 @@ if(isset($_SESSION['session_id'])){
               <button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
                 <i class="fas fa-sign-out-alt"></i>
               </button>
-              <button type="button" name="see_graph" id="see_graph">
+              <button type="button" name="see_graph" id="see_graph" >
                 Vedi grafico
               </button>
             </div>
@@ -111,6 +112,7 @@ if(isset($_SESSION['session_id'])){
       </section>
 
       <script src='../js/canvas.js' type='text/javascript'></script>
+      <script src='../js/canvas_alldata.js' type='text/javascript'></script>
 
   </body>
 </html>

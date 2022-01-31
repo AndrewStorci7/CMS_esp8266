@@ -7,7 +7,7 @@ $error2 = '';
 $error3 = '';
 
 if (isset($_SESSION['session_id'])) {
-    header('Location: ../../php/index.php');
+    header('Location: ../../php/index.php?link=userdata');
     exit;
 }
 
@@ -44,7 +44,7 @@ if (isset($_POST['login'])) {
             $_SESSION['session_user'] = $user['nick'];
 
 
-            header('Location: ../../php/index.php');
+            header('Location: ../../php/index.php?link=userdata');
             exit;
         }
     }
