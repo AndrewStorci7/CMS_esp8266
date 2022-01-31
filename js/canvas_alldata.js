@@ -52,13 +52,10 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
 
-    const alluserdata = table.datasets;
-    console.log(alluserdata);
-
-    /*table.forEach(row => {
+    table.forEach(row => {
         const id = row['id_d'];
-        if(row['id_d'] != id){
-
+        while(id != row){
+          var dataset = 
         }
 
         const hour = row['data_time'];
@@ -68,6 +65,6 @@ async function getData(){
         const temp = row['temp'];
         temperature.push(temp);
         console.log(temp, hour);
-    });*/
+    });
     //console.log(temperature, ore);
 }
