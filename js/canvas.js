@@ -98,6 +98,7 @@ async function getData(){
     const resp = await req.text();
     JSON.stringify(resp);
     const table = JSON.parse(resp);
+    console.log(table);
     //const tabella = table.split('\n').slice(4);
     table.forEach(row => {
         const hour = row['data_time'];

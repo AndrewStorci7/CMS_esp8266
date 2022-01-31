@@ -9,9 +9,9 @@ $error5 = '';
 $error6 = '';
 
 if (isset($_POST['register'])) {
-    $nc = $_POST['nomecompleto'] ?? '';
-    $nick = $_POST['nick'] ?? '';
-    $password = $_POST['pw'] ?? '';
+    $nc = $_POST['nomecompleto']; //?? '';
+    $nick = $_POST['nick']; //?? '';
+    $password = $_POST['pw']; //?? '';
     $isNickValid = filter_var(
         $nick,
         FILTER_VALIDATE_REGEXP, [

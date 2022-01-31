@@ -1,9 +1,9 @@
-$('#see_graph').click(function(){
+$('#grafico').click(function(){
   if(('#tabella').is(":visible")){
-    $('#see_graph').hide();
+    $('#grafico').hide();
     $('#tabella').show();
-  } else if (('#see_graph').is(":visible")) {
-    $('#see_graph').show();
+  } else if (('#grafico').is(":visible")) {
+    $('#grafico').show();
     $('#tabella').hide();
   }
 })

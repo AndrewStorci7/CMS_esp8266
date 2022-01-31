@@ -12,8 +12,8 @@ if (isset($_SESSION['session_id'])) {
 }
 
 if (isset($_POST['login'])) {
-    $nick = $_POST['nick'] ?? '';
-    $password = $_POST['pw'] ?? '';
+    $nick = $_POST['nick']; //?? '';
+    $password = $_POST['pw']; //?? '';
 
     if (empty($nick)) {
         $error1 = '<p class="error">Inserisci l\'username</p>';
