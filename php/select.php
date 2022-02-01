@@ -69,7 +69,7 @@ if(isset($_SESSION['session_id'])){
         </div>
         <div id='tabella' class='row' style='margin-top: 40px; margin-right: 10%;'>
           <div class='container'>
-                <table id='tabelladati' class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
+                <table class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
                   <tr>
                     <th>#</th>
                     <th>Temperatura</th>
@@ -94,7 +94,7 @@ if(isset($_SESSION['session_id'])){
             </tr>';
         }
         echo '</table></div></div>';
-        echo '<div class="row pagine"><br><center>';
+        echo '<div id="tabelladati" class="row pagine"><br><center>';
 
         if($pagina > 1){
           echo ' <a class="meno" href="?link=userdata&pagina='. ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
@@ -136,7 +136,7 @@ if(isset($_SESSION['session_id'])){
         </div>
         <div class='row' style='margin-top: 40px; margin-right: 10%;'>
           <div class='container'>
-                <table id='tabelladati' class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
+                <table class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
                   <tr>
                     <th>#</th>
                     <th>Temperatura</th>
@@ -161,7 +161,7 @@ if(isset($_SESSION['session_id'])){
             </tr>';
         }
         echo '</table></div></div>';
-        echo '<div class="row pagine"><br><center>';
+        echo '<div id="tabelladati" class="row pagine"><br><center>';
 
         if($pagina > 1){
           echo ' <a class="meno" href="?link=alluserdata&pagina='. ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
