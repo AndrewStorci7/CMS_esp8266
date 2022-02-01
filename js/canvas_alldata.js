@@ -55,7 +55,9 @@ async function getData(){
     table.forEach(row => {
         const id = row['id_d'];
         while(id != row){
-          var dataset = 
+          var datasets = table.dataset.id_d;
+          var temp = row['temp'];
+          datasets.dataset.
         }
 
         const hour = row['data_time'];
