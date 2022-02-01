@@ -50,6 +50,7 @@ if(isset($_SESSION['session_id'])){
                          ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
                          WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
       $id_chart = "myChart";
+      $script = '<script src="../js/canvas.js" type="text/javascript"></script>';
       break;
     case "alluserdata":
     /*
@@ -62,6 +63,7 @@ if(isset($_SESSION['session_id'])){
                 ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
       $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
       $id_chart = "myChartAllData";
+      $script = '<script src="../js/canvas_alldata.js" type="text/javascript"></script>';
       break;
   }
 
@@ -117,7 +119,7 @@ if(isset($_SESSION['session_id'])){
           echo '<a class="piu" href="?link=alluserdata&pagina='. ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
       }
   }
-  echo '</center><br></div>';
+  echo '</center><br></div>' . $script;
 
 } else {
   header("Location: ../access/php/login.php");

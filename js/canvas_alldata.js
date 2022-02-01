@@ -12,7 +12,7 @@ async function getChart(){
       data: {
           labels: ore,
           datasets: [{
-              label: , //array conteneti i nomi delle persone o dei dispositivi
+              label: 'ciao', //array conteneti i nomi delle persone o dei dispositivi
               data: temperature,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)'
@@ -23,7 +23,7 @@ async function getChart(){
               borderWidth: 1,
           },
           {
-              label: , //array conteneti i nomi delle persone o dei dispositivi
+              label: 'ciao', //array conteneti i nomi delle persone o dei dispositivi
               data: temperature,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)'
@@ -51,22 +51,14 @@ async function getData(){
     const resp = await req.text();
     JSON.stringify(resp);
     const table = JSON.parse(resp);
+    const tabella = new Array(table);
+    console.log(tabella);
 
-    table.forEach(row => {
-        const id = row['id_d'];
-        while(id != row){
-          var datasets = table.dataset.id_d;
-          var temp = row['temp'];
-          datasets.dataset.
+    // da finire
+    for(let i = 0; i < tabella.length; i++){
+        var primo_array =
+        for(let y = 0; y <){
+
         }
-
-        const hour = row['data_time'];
-        // il Data.parse lo userò per dividere la data dal orario
-        //ore.push(new Date(hour));
-        ore.push(hour);
-        const temp = row['temp'];
-        temperature.push(temp);
-        console.log(temp, hour);
-    });
-    //console.log(temperature, ore);
+    }
 }

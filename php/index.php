@@ -111,9 +111,6 @@ if(isset($_SESSION['session_id'])){
        ?>
       </section>
 
-      <script src='../js/canvas.js' type='text/javascript'></script>
-      <script src='../js/canvas_alldata.js' type='text/javascript'></script>
-
   </body>
 </html>
 <?php
