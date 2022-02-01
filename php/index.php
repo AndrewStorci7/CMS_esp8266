@@ -39,31 +39,31 @@ if(isset($_SESSION['session_id'])){
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="?link=userdata" class="nav-link active" aria-current="page">
+                <a href="?link=userdata" class="nav-link active" id="home_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-home"></i>
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="nav-link text-white" id="data_navbar" onclick="paginaSelector(this.id)">
                   <i class="far fa-chart-bar"></i>
-                  Datas
+                  Data
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="nav-link text-white" id="settings_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-cog"></i>
                   Settings
                 </a>
               </li>
               <li>
-                <a href="?link=alluserdata" class="nav-link text-white">
+                <a href="?link=alluserdata" class="nav-link text-white" id="alluserdata_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-chart-line"></i>
-                  Users datas
+                  Users data
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
                   <!-- INSERIRE LA FOTO PROFILO DELL'UTENTE -->
                   Profile
                 </a>
