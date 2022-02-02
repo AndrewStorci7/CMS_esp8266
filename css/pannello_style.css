@@ -7,3 +7,8 @@
 .mostra{
   display: block !important;
 }
+.title_tabella{
+  font-size: 40px !important;
+  color: rgb(20, 10, 17) !important;
+  margin-bottom: 10px !important;
+}

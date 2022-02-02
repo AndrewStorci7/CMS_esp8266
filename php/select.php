@@ -9,20 +9,7 @@ if(isset($_SESSION['session_id'])){
       $pagina=1;
   }
 
-  if(isset($_POST['nome'])){
-      $nomecercato=$_POST['nome'];
-  }
-  if($cognomecercato!=''){
-      if($nomecercato!=''){
-          $condizione.='AND';
-      }else{
-          $condizione.='WHERE';
-      }
-      $condizione= ' Cognome="'.$cognomecercato.'"';
-  }
-  if($nomecercato!=''){
-      $condizione= 'WHERE Nome="'. $nomecercato . '"';
-  }
+
 
   $link = isset($_GET['link']) ? $_GET['link'] : 'userdata';
   $link_cast = strval($link);
@@ -78,14 +65,18 @@ if(isset($_SESSION['session_id'])){
       </div>
       <div class='row' style='margin-top: 40px; margin-right: 10%;'>
         <div class='container'>
-              <table class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
+          <br>
+          <center><h2 class='title_tabella'><b>Tabella delle temperature</b></h2></center>
+              <table class='table' style='margin-left: 20px; heigth: 700px;'>
+              <thead class='table-dark'>
                 <tr>
                   <th>#</th>
                   <th>Temperatura</th>
                   <th>Nome disp</th>
                   <th>Nickname User</th>
                   <th>Data e ora</th>
-                </tr>";
+                </tr>
+              </thead><tbody>";
 
       while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
           $index++;
@@ -102,7 +93,7 @@ if(isset($_SESSION['session_id'])){
           <td>' . $data_time . '</td>
           </tr>';
       }
-      echo '</table></div></div>';
+      echo '</tbody></table></div></div>';
       echo '<div id="tabelladati" class="row pagine"><br><center>';
 
       if($pagina > 1){

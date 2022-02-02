@@ -4,6 +4,7 @@
 <ul>
   <li>Sistemare il file canvas_alldata.js;</li>
   <li>Aggiungere css.</li>
+  <li>Aggiungere pagina (per l'admin) per </li>
 </ul>
 
 <h4>Precisazioni per il file canvas_alldata.js</h4>
