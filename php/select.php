@@ -9,16 +9,8 @@ if(isset($_SESSION['session_id'])){
       $pagina=1;
   }
 
-  $nometabella='dati';
-  $condizione='';
-  $nomecercato='';
-  $cognomecercato='';
-
-  /*if(isset($_POST['nome'])){
+  if(isset($_POST['nome'])){
       $nomecercato=$_POST['nome'];
-  }
-  if(isset($_POST['cognome'])){
-      $cognomecercato=$_POST['cognome'];
   }
   if($cognomecercato!=''){
       if($nomecercato!=''){
@@ -30,7 +22,8 @@ if(isset($_SESSION['session_id'])){
   }
   if($nomecercato!=''){
       $condizione= 'WHERE Nome="'. $nomecercato . '"';
-  }*/
+  }
+
   $link = isset($_GET['link']) ? $_GET['link'] : 'userdata';
   $link_cast = strval($link);
 

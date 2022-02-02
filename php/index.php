@@ -91,10 +91,9 @@ if(isset($_SESSION['session_id'])){
               <!-- ricerca -->
               <div class="container">
                   <form class="d-flex formSearchPannel">
-                    <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2 searchPannel" type="search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                     <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
-                    <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
                   </form>
               </div>
             </div>
@@ -103,9 +102,9 @@ if(isset($_SESSION['session_id'])){
               <button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
                 <i class="fas fa-sign-out-alt"></i>
               </button>
-              <button type="button" name="see_graph" id="see_graph" >
+              <!--<button type="button" name="see_graph" id="see_graph" >
                 Vedi grafico
-              </button>
+              </button>-->
             </div>
           </div>
         </div>
