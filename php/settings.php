@@ -30,7 +30,7 @@ if(isset($_SESSION['session_id'])){
     <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
   <body>
-    <header class="header-area overlay">
+    <header class="header-area">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <h3 class="navbar_brand titoloHeader">ESP pannell</h3>
@@ -56,20 +56,22 @@ if(isset($_SESSION['session_id'])){
                 </div>
             </div>
         </nav>
-    </header>
-    <main>
     <?php
     if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
-      echo "<div class='container'>";
+      echo "<div class='container' style='z-index: 99999 !important'>";
       $query = "SELECT dispositivi.n_disp, utenti.nc, utenti.nick
                 FROM dispositivi JOIN utenti
                 ON dispositivi.id_u = utenti.id";
       $pre = $pdo->query($query);
       while($risultato = $pre->fetch()){
         echo '<div class="row div_dispositivi">
-
+                <h3 class="navbar_brand titoloHeader">Settings dispositivo di ' . $risultato['nc'] . '</h3>
                 <form method="post" action="settings.php">
-                  <input>
+                  <input
+                  <input class="form-control" type="text" id="n_disp" name="nick" value="' . $risultato['nick']. '"><br>
+                  <label
+                  <input type="text" id="nick" placeholder="Nickname" name="nick" >
+
                 </form>
               </div>';
       }
@@ -80,7 +82,7 @@ if(isset($_SESSION['session_id'])){
     <?php
     }
      ?>
-    </main>
+   </header>
   </body>
 </html>
 <?php
