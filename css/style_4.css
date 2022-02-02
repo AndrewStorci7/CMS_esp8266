@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
 @import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 html {
   font-size: 62.5%;
 }
@@ -73,8 +74,8 @@ p {
   background-color: rgba(0, 0, 0, .3);
 }
 .header-area {
-  position: relative;
-  height: 100vh;
+  /*position: relative;*/
+  height: auto;
   background: #4B84EB;
   background-attachment: fixed;
   background-position: center center;
@@ -125,6 +126,28 @@ p {
   padding-left: 100px;
   text-decoration: none;
   color: white;
+}
+.titolo_pagdispositivi{
+  font-family: 'Lobster', cursive;
+  font-size: 6rem;
+  color: white;
+  margin-bottom: 40px;
+}
+.div_dispositivi{
+  background-color: white;
+  box-shadow: 10px 10px 0.5px #dedede;
+  margin-bottom: 40px;
+  /*margin-top: 20%;*/
+}
+.titolo_dispositivi{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 3.1rem;
+  padding-left: 10px;
+  text-decoration: none;
+  color: blue;
+}
+.center_div{
+  padding-top: 40%;
 }
 .navbar .navbar-toggler {
   position: relative !important;

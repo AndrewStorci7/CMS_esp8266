@@ -57,31 +57,47 @@ if(isset($_SESSION['session_id'])){
             </div>
         </nav>
     <?php
-    if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
-      echo "<div class='container' style='z-index: 99999 !important'>";
-      $query = "SELECT dispositivi.n_disp, utenti.nc, utenti.nick
-                FROM dispositivi JOIN utenti
-                ON dispositivi.id_u = utenti.id";
-      $pre = $pdo->query($query);
-      while($risultato = $pre->fetch()){
-        echo '<div class="row div_dispositivi">
-                <h3 class="navbar_brand titoloHeader">Settings dispositivo di ' . $risultato['nc'] . '</h3>
-                <form method="post" action="settings.php">
-                  <input
-                  <input class="form-control" type="text" id="n_disp" name="nick" value="' . $risultato['nick']. '"><br>
-                  <label
-                  <input type="text" id="nick" placeholder="Nickname" name="nick" >
+    $role = isset($_SESSION['session_role']) ? $_SESSION['session_role'] : '2';
+    intval($role);
+    switch ($role) {
+      case 1:
+        $query = "SELECT dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
+                  FROM dispositivi JOIN utenti
+                  ON dispositivi.id_u = utenti.id";
+        $titolo_pag = "Gestione dispositivi utenti";
+        $class_div = "";
+        break;
 
+      case 2:
+        $query = "SELECT dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
+                  FROM dispositivi JOIN utenti
+                  ON dispositivi.id_u = utenti.id WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
+        $titolo_pag = "Gestione dispositivo";
+        $class_div = "center_div";
+        break;
+    }
+    echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
+            <center><h2 class='titolo_pagdispositivi'>" . $titolo_pag . "</h2></center>";
+    $pre = $pdo->query($query);
+    while($risultato = $pre->fetch()){
+      echo '<div class="row div_dispositivi ' . $class_div . '">
+              <h3 class="titolo_dispositivi">Settings dispositivo di ' . $risultato['nc'] . '</h3>
+                <form method="post" action="settings.php">
+                  <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
+                  <input class="form-control" type="text" value="' . $risultato['id_disp'] . '" readonly>
+                  <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
+                  <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
+                  <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
+                  <!--<label for="exampleInputEmail1" class="form-label">Nome completo</label>
+                  <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
+                  <label for="exampleInputEmail1" class="form-label">Nickname</label>
+                  <input class="form-control" style="margin-bottom: 10px;" type="text" name="nick" value="' . $risultato['nick'] . '">-->
+                  <
                 </form>
               </div>';
-      }
-      echo "</div>";
-    } else if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 2){
-     ?>
-
-    <?php
     }
-     ?>
+    echo "</div>";
+    ?>
    </header>
   </body>
 </html>
