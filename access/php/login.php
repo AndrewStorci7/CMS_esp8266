@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
         header('Location: ../html/login_form.php');
     }else{
         $query = "
-            SELECT nick, pw
+            SELECT nick, pw, ruolo
             FROM utenti
             WHERE nick = :nick
         ";
@@ -42,6 +42,7 @@ if (isset($_POST['login'])) {
             session_regenerate_id();
             $_SESSION['session_id'] = session_id();
             $_SESSION['session_user'] = $user['nick'];
+            $_SESSION['session_role'] = $user['ruolo'];
 
 
             header('Location: ../../php/index.php?link=userdata');

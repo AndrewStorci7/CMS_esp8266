@@ -56,12 +56,18 @@ if(isset($_SESSION['session_id'])){
                   Settings
                 </a>
               </li>
+              <?php
+              if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
+               ?>
               <li>
                 <a href="?link=alluserdata" class="nav-link text-white" id="alluserdata_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-chart-line"></i>
                   Users data
                 </a>
               </li>
+              <?php
+              }
+               ?>
               <li>
                 <a href="#" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
                   <!-- INSERIRE LA FOTO PROFILO DELL'UTENTE -->
