@@ -51,7 +51,7 @@ if(isset($_SESSION['session_id'])){
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white" id="settings_navbar" onclick="paginaSelector(this.id)">
+                <a href="settings.php" class="nav-link text-white" id="settings_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-cog"></i>
                   Settings
                 </a>

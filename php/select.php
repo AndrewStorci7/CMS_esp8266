@@ -9,6 +9,7 @@ if(isset($_SESSION['session_id'])){
       $pagina=1;
   }
 
+/*
   if(isset($_POST['nome'])){
       $nomecercato=$_POST['nome'];
   }
@@ -23,6 +24,7 @@ if(isset($_SESSION['session_id'])){
   if($nomecercato!=''){
       $condizione= 'WHERE Nome="'. $nomecercato . '"';
   }
+  */
 
   $link = isset($_GET['link']) ? $_GET['link'] : 'userdata';
   $link_cast = strval($link);
