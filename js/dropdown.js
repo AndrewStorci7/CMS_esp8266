@@ -20,9 +20,62 @@ function seegraph(){
 function paginaSelector(id){
   let id_clicked = document.getElementById(id);
   if(id_clicked.classList.contains('active')){
-    
+
   } else {
 
   }
 
 }
+
+function deleteDisp(id){
+  if (id == 0) {
+    alert("ID invalido");
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        if(this.responseText==1){
+          window.location.reload();
+        }else{
+          alert("Utente non eliminato");
+        }
+      }
+    };
+    var annulla = window.confirm("Sei sicuro ?");
+    if(annulla){
+      xmlhttp.open("GET", "settings_functions/delete.php?ID=" + id, true);
+      xmlhttp.send();
+    } else {
+      xmlhttp.abort();
+      window.alert("Utente non eliminato");
+    }
+  }
+}
+
+/*
+function modifyDisp(id){
+  if (id == 0) {
+    alert("ID invalido");
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        if(this.responseText==1){
+          window.location.reload();
+        }else{
+          alert("Utente non eliminato");
+        }
+      }
+    };
+    var annulla = window.confirm("Sei sicuro ?");
+    if(annulla){
+      xmlhttp.open("GET", "settings_functions/delete.php?ID=" + id, true);
+      xmlhttp.send();
+    } else {
+      xmlhttp.abort();
+      window.alert("Utente non eliminato");
+    }
+  }
+}*/

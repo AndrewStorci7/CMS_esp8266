@@ -25,7 +25,7 @@ if(isset($_SESSION['session_id'])){
     <script src="https://kit.fontawesome.com/2d628bcfce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="../js/script.js"></script>
-    <script type="text/javascript" src="../js/dropdown.js"></script>
+    <script type="text/javascript" src="../js/dropdown.js?ts=<?=time()?>&quot"></script>
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
     <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
@@ -61,26 +61,28 @@ if(isset($_SESSION['session_id'])){
     intval($role);
     switch ($role) {
       case 1:
-        $query = "SELECT dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
+        $query = "SELECT utenti.id, dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
                   FROM dispositivi JOIN utenti
                   ON dispositivi.id_u = utenti.id";
         $titolo_pag = "Gestione dispositivi utenti";
-        $class_div = "";
+        //$class_div = "";
+        $delete = " ";
         break;
 
       case 2:
-        $query = "SELECT dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
+        $query = "SELECT utenti.id, dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
                   FROM dispositivi JOIN utenti
                   ON dispositivi.id_u = utenti.id WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
         $titolo_pag = "Gestione dispositivo";
-        $class_div = "center_div";
+        //$class_div = "center_div";
+        $delete = "display: none;";
         break;
     }
     echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
             <center><h2 class='titolo_pagdispositivi'>" . $titolo_pag . "</h2></center>";
     $pre = $pdo->query($query);
     while($risultato = $pre->fetch()){
-      echo '<div class="row div_dispositivi ' . $class_div . '">
+      echo '<div class="row div_dispositivi">
               <h3 class="titolo_dispositivi">Settings dispositivo di ' . $risultato['nc'] . '</h3>
                 <form method="post" action="settings.php">
                   <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
@@ -92,9 +94,10 @@ if(isset($_SESSION['session_id'])){
                   <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
                   <label for="exampleInputEmail1" class="form-label">Nickname</label>
                   <input class="form-control" style="margin-bottom: 10px;" type="text" name="nick" value="' . $risultato['nick'] . '">-->
-                  <
+                  <button class="hoverlink" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" type="submit" name="conferma"><i class="fas fa-user-edit"></i></button>
+                  <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
                 </form>
-              </div>';
+            </div>';
     }
     echo "</div>";
     ?>
@@ -102,5 +105,13 @@ if(isset($_SESSION['session_id'])){
   </body>
 </html>
 <?php
+  $select_user = "SELECT id FROM utenti WHERE nick ";
+  $modify_query = "UPDATE dispositivi
+                   SET n_disp = '" . strval($_POST['n_disp']) . "' WHERE id_u = ";
+  if($_POST['n_disp'] == null || $_POST['n_disp'] == 'undefined' || $_POST['n_disp'] == ""){
+    echo "<script>alert('Per modificare devi riempire il campo');</script>";
+  } else {
+    $pdo->query($modify_query);
+  }
 }
 ?>

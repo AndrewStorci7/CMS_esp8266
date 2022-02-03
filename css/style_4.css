@@ -137,6 +137,7 @@ p {
   background-color: white;
   box-shadow: 10px 10px 0.5px #dedede;
   margin-bottom: 40px;
+  padding: 10px;
   /*margin-top: 20%;*/
 }
 .titolo_dispositivi{
@@ -148,6 +149,10 @@ p {
 }
 .center_div{
   padding-top: 40%;
+}
+.hoverlink:hover{
+  cursor: pointer !important;
+  opacity: 1 !important;
 }
 .navbar .navbar-toggler {
   position: relative !important;
