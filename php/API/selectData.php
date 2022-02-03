@@ -18,7 +18,7 @@ if(isset($_SESSION['session_id'])){
 
   $result2 = $pdo->prepare($select_query);
   $result2->execute();
-  while($matrice = $result2->fetchAll(PDO::FETCH_DEFAULT)){
+  while($matrice = $result2->fetchAll()){
     if($matrice !== null){
       $json = json_encode($matrice);
       echo $json;

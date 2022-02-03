@@ -2,6 +2,7 @@
 session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
+
  ?>
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -84,16 +85,12 @@ if(isset($_SESSION['session_id'])){
     while($risultato = $pre->fetch()){
       echo '<div class="row div_dispositivi">
               <h3 class="titolo_dispositivi">Settings dispositivo di ' . $risultato['nc'] . '</h3>
-                <form method="post" action="settings.php">
+                <form method="post" action="settings_functions/modify.php">
                   <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
                   <input class="form-control" type="text" value="' . $risultato['id_disp'] . '" readonly>
                   <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
                   <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
                   <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
-                  <!--<label for="exampleInputEmail1" class="form-label">Nome completo</label>
-                  <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
-                  <label for="exampleInputEmail1" class="form-label">Nickname</label>
-                  <input class="form-control" style="margin-bottom: 10px;" type="text" name="nick" value="' . $risultato['nick'] . '">-->
                   <button class="hoverlink" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" type="submit" name="conferma"><i class="fas fa-user-edit"></i></button>
                   <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
                 </form>
@@ -105,13 +102,5 @@ if(isset($_SESSION['session_id'])){
   </body>
 </html>
 <?php
-  $select_user = "SELECT id FROM utenti WHERE nick ";
-  $modify_query = "UPDATE dispositivi
-                   SET n_disp = '" . strval($_POST['n_disp']) . "' WHERE id_u = ";
-  if($_POST['n_disp'] == null || $_POST['n_disp'] == 'undefined' || $_POST['n_disp'] == ""){
-    echo "<script>alert('Per modificare devi riempire il campo');</script>";
-  } else {
-    $pdo->query($modify_query);
-  }
 }
 ?>
