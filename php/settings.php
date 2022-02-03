@@ -91,7 +91,7 @@ if(isset($_SESSION['session_id'])){
                   <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
                   <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
                   <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
-                  <button class="hoverlink" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" type="submit" name="conferma"><i class="fas fa-user-edit"></i></button>
+                  <input class="hoverlink" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" type="submit" name="conferma" value="diocane">
                   <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
                 </form>
             </div>';
