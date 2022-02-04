@@ -69,7 +69,7 @@ if(isset($_SESSION['session_id'])){
               }
                ?>
               <li>
-                <a href="#" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
+                <a href="profile.php" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
                   <!-- INSERIRE LA FOTO PROFILO DELL'UTENTE -->
                   Profile
                 </a>

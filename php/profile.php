@@ -2,13 +2,12 @@
 session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
-
  ?>
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Settings users</title>
+    <title>Profile</title>
     <meta description="refresh" content="0; url=http://example.com">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7">
@@ -57,50 +56,44 @@ if(isset($_SESSION['session_id'])){
                 </div>
             </div>
         </nav>
-    <?php
-    $role = isset($_SESSION['session_role']) ? $_SESSION['session_role'] : '2';
-    intval($role);
-    switch ($role) {
-      case 1:
-        $query = "SELECT utenti.id, dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
-                  FROM dispositivi JOIN utenti
-                  ON dispositivi.id_u = utenti.id";
-        $titolo_pag = "Gestione dispositivi utenti";
-        //$class_div = "";
-        $delete = " ";
-        break;
+        <?php
+        $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
+                  FROM utenti JOIN ruoli
+                  ON utenti.ruolo = ruoli.id
+                  WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
 
-      case 2:
-        $query = "SELECT utenti.id, dispositivi.id_disp, dispositivi.n_disp, utenti.nc, utenti.nick
-                  FROM dispositivi JOIN utenti
-                  ON dispositivi.id_u = utenti.id WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
-        $titolo_pag = "Gestione dispositivo";
-        //$class_div = "center_div";
-        $delete = "display: none;";
-        break;
-    }
-    echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
-            <center><h2 class='titolo_pagdispositivi'>" . $titolo_pag . "</h2></center>";
-    $pre = $pdo->query($query);
-    while($risultato = $pre->fetch()){
-      echo '<div class="row div_dispositivi">
-              <h3 class="titolo_dispositivi">Settings dispositivo di ' . $risultato['nc'] . '</h3>
-                <form method="post" action="settings_functions/modify.php">
-                  <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
-                  <input class="form-control" type="text" value="' . $risultato['id_disp'] . '" readonly>
-                  <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
-                  <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
-                  <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
-                  <a class="hoverlink" alt="Modifica" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" onclick="modificaDisp(' . $risultato['id_disp'] . ', ' . $risultato['n_disp'] . ')"><i class="fas fa-user-edit"></i></a>
-                  <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
-                </form>
-            </div>';
-    }
-    echo "</div>";
-    ?>
-   </header>
+        echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
+                <center><h2 class='titolo_pagdispositivi'>Gestione profilo</h2></center>";
+
+
+        $pre = $pdo->query($query);
+        while($risultato = $pre->fetch()){
+          echo '<div class="row div_dispositivi">
+                  <h3 class="titolo_dispositivi">Impostazioni del profilo</h3>
+                    <form method="post" action="settings_functions/modify.php">
+                      <label for="exampleInputEmail1" class="form-label">Nome completo</label>
+                      <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
+                      <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
+                      <label for="exampleInputEmail1" class="form-label">Nickname</label>
+                      <input class="form-control" type="text" name="nick" value="' . $risultato['nick'] . '">
+                      <label for="exampleInputEmail1" class="form-label">Password</label>
+                      <input class="form-control" type="password" name="pw" value="' . $risultato['pw'] . '">
+                      
+                      <label for="exampleInputEmail1" class="form-label">Ruolo</label>
+                      <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
+                      <br>
+                      <a class="hoverlink" alt="Modifica" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" ><i class="fas fa-user-edit"></i></a>
+                    </form>
+                </div>';
+        }
+        echo "</div>";
+         ?>
+    </header>
   </body>
 </html>
+
 <?php
+} else {
+  header('Location: ../access/html/login_form.php');
 }
-?>
+ ?>
