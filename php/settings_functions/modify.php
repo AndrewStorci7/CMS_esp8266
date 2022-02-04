@@ -1,5 +1,9 @@
 <?php
 require_once('../config.php');
+$query = "INSERT INTO tabella_file
+          VALUES nome = '$nome_file_vero',
+              tipo = '$tipo_file',
+              dati = '$dati_file'";
 $n_disp = isset($_POST['n_disp']) ? $_POST['n_disp'] : '';
 $id_disp = isset($_POST['id_disp']) ? $_POST['id_disp'] : '';
 $n_disp_cast = strval($n_disp);
@@ -13,4 +17,9 @@ if($n_disp_cast == null || $n_disp_cast == 'undefined' || $n_disp_cast == "" || 
   $pdo->query($modify_query);
   header('Location: ../settings.php');
 }
+
+
+
+
+
  ?>

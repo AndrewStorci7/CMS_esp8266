@@ -28,7 +28,6 @@ if(isset($_SESSION['session_id'])){
     <script type="text/javascript" src="../js/script.js"></script>
     <script type="text/javascript" src="../js/dropdown.js?ts=<?=time()?>&quot"></script>
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
-    <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
   <body>
     <header class="header-area">

@@ -9,6 +9,7 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   overflow-x: hidden !important;
+  background: #4B84EB;
 }
 h1 {
   /*margin-bottom: 0.5em;*/
@@ -75,7 +76,7 @@ p {
 }
 .header-area {
   /*position: relative;*/
-  height: auto;
+  height: 100%;
   background: #4B84EB;
   background-attachment: fixed;
   background-position: center center;

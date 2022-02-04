@@ -27,7 +27,6 @@ if(isset($_SESSION['session_id'])){
     <script type="text/javascript" src="../js/script.js"></script>
     <script type="text/javascript" src="../js/dropdown.js?ts=<?=time()?>&quot"></script>
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
-    <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
   <body>
     <header class="header-area">
@@ -67,20 +66,28 @@ if(isset($_SESSION['session_id'])){
 
 
         $pre = $pdo->query($query);
+        //$include_upload = "include('settings_functions/foto.php');";
         while($risultato = $pre->fetch()){
           echo '<div class="row div_dispositivi">
                   <h3 class="titolo_dispositivi">Impostazioni del profilo</h3>
+                    <form enctype="multipart/form-data" method="post" action="settings_functions/foto.php">
+                      <label for="exampleInputEmail1" class="form-label">Foto profilo</label><br>
+                      <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                      <input type="file" name="foto"><br>
+                      <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
+                      <img style="float: right;" width="100px" height="auto" src="' . include_once('settings_functions/visualizza_foto.php') . '">';
+          echo '</form>
                     <form method="post" action="settings_functions/modify.php">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>
                       <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
-                      <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
+
                       <label for="exampleInputEmail1" class="form-label">Nickname</label>
                       <input class="form-control" type="text" name="nick" value="' . $risultato['nick'] . '">
                       <label for="exampleInputEmail1" class="form-label">Password</label>
                       <input class="form-control" type="password" name="pw" value="' . $risultato['pw'] . '">
-                      
                       <label for="exampleInputEmail1" class="form-label">Ruolo</label>
                       <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
+                      <p style="font-size: 12px">Solo l\'amministratore può modificare i permessi</p>
                       <br>
                       <a class="hoverlink" alt="Modifica" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" ><i class="fas fa-user-edit"></i></a>
                     </form>
