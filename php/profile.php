@@ -75,16 +75,13 @@ if(isset($_SESSION['session_id'])){
                       <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
-                      <img style="float: right;" width="100px" height="auto" src="' . include_once('settings_functions/visualizza_foto.php') . '">';
-          echo '</form>
+                    </form>
                     <form method="post" action="settings_functions/modify.php">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>
                       <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
 
                       <label for="exampleInputEmail1" class="form-label">Nickname</label>
                       <input class="form-control" type="text" name="nick" value="' . $risultato['nick'] . '">
-                      <label for="exampleInputEmail1" class="form-label">Password</label>
-                      <input class="form-control" type="password" name="pw" value="' . $risultato['pw'] . '">
                       <label for="exampleInputEmail1" class="form-label">Ruolo</label>
                       <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
                       <p style="font-size: 12px">Solo l\'amministratore può modificare i permessi</p>
