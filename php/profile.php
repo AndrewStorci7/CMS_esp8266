@@ -66,7 +66,7 @@ if(isset($_SESSION['session_id'])){
 
 
         $pre = $pdo->query($query);
-        //$include_upload = "include('settings_functions/foto.php');";
+        include_once 'settings_functions/visualizza_foto.php';
         while($risultato = $pre->fetch()){
           echo '<div class="row div_dispositivi">
                   <h3 class="titolo_dispositivi">Impostazioni del profilo</h3>
@@ -75,6 +75,7 @@ if(isset($_SESSION['session_id'])){
                       <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
+                      <img style="float: right;" width="400px" src="../' . $addres . '">
                     </form>
                     <form method="post" action="settings_functions/modify.php">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>

@@ -70,7 +70,7 @@ if(isset($_SESSION['session_id'])){
                ?>
               <li>
                 <a href="profile.php" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
-                  <img alt="Foto profilo" src="../ <?php include_once("settings_functions/visualizza_foto.php") ?> " width="60px" height="auto">
+                  <img alt="Foto profilo" style="border-radius: 600px; margin-left: -3px; margin-right: 3px;" src="../img/immagini_utenti/logo_NFT.png" width="30px" height="30px">
                   Profile
                 </a>
               </li>
