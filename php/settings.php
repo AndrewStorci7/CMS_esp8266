@@ -84,18 +84,20 @@ if(isset($_SESSION['session_id'])){
     while($risultato = $pre->fetch()){
       echo '<div class="row div_dispositivi">
               <h3 class="titolo_dispositivi">Settings dispositivo di ' . $risultato['nc'] . '</h3>
-                <form method="post" action="settings_functions/modify.php">
+                <form method="post" action="settings_functions/modify.php?type=settings">
                   <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
-                  <input class="form-control" type="text" value="' . $risultato['id_disp'] . '" readonly>
+                  <input class="form-control" type="text" name="id_disp" value="' . $risultato['id_disp'] . '" readonly>
                   <p style="font-size: 12px">L\'id del dispositivo non può essere cambiato</p>
                   <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
                   <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
-                  <a class="hoverlink" alt="Modifica" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" onclick="modificaDisp(' . $risultato['id_disp'] . ', ' . $risultato['n_disp'] . ')"><i class="fas fa-user-edit"></i></a>
+                  <button class="hoverlink modifica_button" alt="Modifica" type="submit" name="modifica"><i class="fas fa-user-edit"></i></button>
                   <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
                 </form>
             </div>';
     }
-    echo "</div>";
+    echo "
+          <center><a style='color: green; font-size: 30px;' href='settings_functions/add_disp.php'><i class='fas fa-plus'></i></a></center>
+        </div>";
     ?>
    </header>
   </body>

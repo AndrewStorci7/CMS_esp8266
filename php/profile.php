@@ -48,7 +48,7 @@ if(isset($_SESSION['session_id'])){
                         <li class="dropdown">
                             <a href="javascript:void();" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu">
-                                <a href="access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
+                                <a href="../../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -66,7 +66,7 @@ if(isset($_SESSION['session_id'])){
 
 
         $pre = $pdo->query($query);
-        include_once 'settings_functions/visualizza_foto.php';
+        //include_once 'settings_functions/visualizza_foto.php';
         while($risultato = $pre->fetch()){
           echo '<div class="row div_dispositivi">
                   <h3 class="titolo_dispositivi">Impostazioni del profilo</h3>
@@ -75,9 +75,8 @@ if(isset($_SESSION['session_id'])){
                       <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
-                      <img style="float: right;" width="400px" src="../' . $addres . '">
                     </form>
-                    <form method="post" action="settings_functions/modify.php">
+                    <form method="post" action="settings_functions/modify.php?type=profile">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>
                       <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
 
@@ -87,7 +86,7 @@ if(isset($_SESSION['session_id'])){
                       <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
                       <p style="font-size: 12px">Solo l\'amministratore può modificare i permessi</p>
                       <br>
-                      <a class="hoverlink" alt="Modifica" style="float: right; font-size: 18px; color: rgb(66, 133, 242); padding: 10px;" ><i class="fas fa-user-edit"></i></a>
+                      <button class="hoverlink modifica_button" alt="Modifica" type="submit" name="modifica"><i class="fas fa-user-edit"></i></button>
                     </form>
                 </div>';
         }

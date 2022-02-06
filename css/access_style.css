@@ -3,3 +3,6 @@ body{
   background-repeat: no-repeat;
   background-size: auto;
 }
+.add_display{
+  display: block !important;
+}

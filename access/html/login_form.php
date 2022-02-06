@@ -1,5 +1,26 @@
 <?php
 include_once('../php/login.php');
+
+$msg = isset($_GET['msg']) ? $_GET['msg'] : "";
+strval($msg);
+$errmsg = "";
+$classerr = "";
+switch ($msg) {
+  case 'err3':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Credenziali errate</p>";
+    $classerr = "is-invalid";
+    break;
+
+  case 'err2':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Inserire la password</p>";
+    $classerr = "is-invalid";
+    break;
+
+  case 'err1':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Inserire il nickname</p>";
+    $classerr = "is-invalid";
+    break;
+}
  ?>
 <!DOCTYPE html>
 <html>
@@ -14,13 +35,11 @@ include_once('../php/login.php');
     <body>
       <div class="container-fluid">
         <center>
-        <form method="post" action="../php/login.php">
+        <form class="form-floating" method="post" action="../php/login.php">
             <h1>Login</h1>
-            <input type="text" id="nick" placeholder="Nickname" name="nick" required>
-            <?php echo $error1; ?>
-            <input type="password" id="pw" placeholder="Password" name="pw" required>
-            <?php echo $error2; ?>
-            <?php echo $error3; ?>
+            <input type="text" class="form-control <?php echo $classerr; ?> " id="nick" placeholder="Nickname" name="nick" required>
+            <input type="password" class="form-control <?php echo $classerr; ?> " id="pw" placeholder="Password" name="pw" required>
+            <?php echo $errmsg; ?>
             <button type="submit" name="login">Accedi</button>
             <center>
               <p>Se non sei registrato, <a href="register_form.php">registrati</a></p>

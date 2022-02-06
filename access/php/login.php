@@ -2,10 +2,6 @@
 session_start();
 require_once('../../php/config.php');
 
-$error1 = '';
-$error2 = '';
-$error3 = '';
-
 if (isset($_SESSION['session_id'])) {
     header('Location: ../../php/index.php?link=userdata');
     exit;
@@ -16,11 +12,9 @@ if (isset($_POST['login'])) {
     $password = $_POST['pw']; //?? '';
 
     if (empty($nick)) {
-        $error1 = '<p class="error">Inserisci l\'username</p>';
-        header('Location: ../html/login_form.php');
+        header('Location: ../html/login_form.php?msg=err1');
     } else if(empty($password)) {
-        $error2 = '<p class="error">Inserisci la password</p>';
-        header('Location: ../html/login_form.php');
+        header('Location: ../html/login_form.php?msg=err2');
     }else{
         $query = "
             SELECT nick, pw, ruolo
@@ -36,8 +30,7 @@ if (isset($_POST['login'])) {
         $user = $check->fetch(PDO::FETCH_ASSOC);
 
         if (!$user || password_verify($password, $user['pw']) === false) {
-            $error3 = '<p class="error">Credenziali utente errate</p>';
-            header('Location: ../html/login_form.php');
+            header('Location: ../html/login_form.php?msg=err3');
         } else {
             session_regenerate_id();
             $_SESSION['session_id'] = session_id();
