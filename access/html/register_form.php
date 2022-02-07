@@ -15,6 +15,7 @@ include_once('../php/register.php');
             <input type="text" id="nomecompleto" placeholder="Nome completo" name="nomecompleto" maxlength="50" required>
             <input type="text" id="nick" placeholder="Nickname" name="nick" maxlength="50" required>
             <?php echo $error1 . $error3 . $error5; ?>
+            <input type="email" id="nick" placeholder="E-mail" name="email" maxlength="50" required>
             <input type="password" id="pw" placeholder="Password" name="pw" required>
             <?php echo $error2 . $error4 . $error6; ?>
             <button type="submit" name="register">Registrati</button>

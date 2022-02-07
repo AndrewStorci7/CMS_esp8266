@@ -12,6 +12,11 @@ if (isset($_POST['register'])) {
     $nc = $_POST['nomecompleto']; //?? '';
     $nick = $_POST['nick']; //?? '';
     $password = $_POST['pw']; //?? '';
+    $email = $_POST['email'];
+    $isEmailValid = filter_var(
+        $email,
+        FILTER_VALIDATE_EMAIL
+    );
     $isNickValid = filter_var(
         $nick,
         FILTER_VALIDATE_REGEXP, [
@@ -48,11 +53,10 @@ if (isset($_POST['register'])) {
         $query = "
             SELECT id
             FROM utenti
-            WHERE nick = :nick
-        ";
+            WHERE email = :email";
 
         $check = $pdo->prepare($query);
-        $check->bindParam(':nick', $nick, PDO::PARAM_STR);
+        $check->bindParam(':email', $email, PDO::PARAM_STR);
         $check->execute();
 
         $user = $check->fetchAll(PDO::FETCH_ASSOC);
@@ -62,11 +66,12 @@ if (isset($_POST['register'])) {
             header('Location: ../html/register_form.php');
         } else {
             $query = "
-                INSERT INTO utenti(nick, pw, nc)
-                VALUES (:nick, :pw, :nomecompleto)
+                INSERT INTO utenti(nick, email, pw, nc)
+                VALUES (:nick, :email, :pw, :nomecompleto)
             ";
 
             $check = $pdo->prepare($query);
+            $check->bindParam(':email', $email, PDO::PARAM_STR);
             $check->bindParam(':nick', $nick, PDO::PARAM_STR);
             $check->bindParam(':pw', $password_hash, PDO::PARAM_STR);
             $check->bindParam(':nomecompleto', $nc, PDO::PARAM_STR);
