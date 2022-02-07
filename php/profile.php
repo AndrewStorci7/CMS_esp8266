@@ -48,7 +48,7 @@ if(isset($_SESSION['session_id'])){
                         <li class="dropdown">
                             <a href="javascript:void();" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu">
-                                <a href="../../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
+                                <a href="../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
                             </div>
                         </li>
                     </ul>

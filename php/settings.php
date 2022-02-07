@@ -2,7 +2,11 @@
 session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
-
+  $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+  strval($msg);
+  if($msg == 'ok'){
+    echo "<script>alert('Dispositivo aggiunto con successo');</script>";
+  }
  ?>
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -49,7 +53,7 @@ if(isset($_SESSION['session_id'])){
                         <li class="dropdown">
                             <a href="javascript:void();" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu">
-                                <a href="access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
+                                <a href="../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -91,14 +95,43 @@ if(isset($_SESSION['session_id'])){
                   <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
                   <input class="form-control" type="text" name="n_disp" value="' . $risultato['n_disp'] . '"><br>
                   <button class="hoverlink modifica_button" alt="Modifica" type="submit" name="modifica"><i class="fas fa-user-edit"></i></button>
-                  <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id'] . ' )"><i class="fas fa-trash"></i></a>
+                  <a class="hoverlink" alt="Elimina" style="float: right; color: rgb(230, 66, 30); font-size: 18px; padding: 10px; ' . $delete . '" onclick="deleteDisp( ' . $risultato['id_disp'] . ' )"><i class="fas fa-trash"></i></a>
                 </form>
             </div>';
     }
     echo "
-          <center><a style='color: green; font-size: 30px;' href='settings_functions/add_disp.php'><i class='fas fa-plus'></i></a></center>
+          <center><a style='color: green; font-size: 30px; text-decoration: none;' href='#form_aggiungi' onclick='seeAggiungi()'>Aggiungi dispositivo <i class='fas fa-plus'></i></a></center>
         </div>";
     ?>
+
+    <div class="container" style="margin-bottom: 200px; padding-bottom: 10px;">
+      <div class="row div_dispositivi" id="form_aggiungi">
+        <form action="settings_functions/add_disp.php" method="post">
+          <label for="exampleInputEmail1" class="form-label">Id dispositivo</label>
+          <input class="form-control" type="text" name="id_disp" placeholder="L'id verrà assegnato automaticamente" readonly>
+          <label for="exampleInputEmail1" class="form-label">Nome dispositivo</label>
+          <input class="form-control" type="text" name="n_disp" placeholder="Nome dispositivo"><br>
+          <label for="exampleInputEmail1" class="form-label">Propietario</label>
+
+            <?php
+            if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
+              echo '<select class="form-select" aria-label="Scegli utente">
+                <option selected>Scegli un utente</option>';
+              $select_u = "SELECT nick
+                           FROM utenti";
+              $res_select = $pdo->query($select_u);
+              while($righe = $res_select->fetch(PDO::FETCH_ASSOC)){
+                echo "<option name='nick_propietario' value='" . $righe['nick'] . "'>" . $righe['nick'] . "</option>";
+              }
+            } elseif (isset($_SESSION['session_role']) && $_SESSION['session_role'] == 2){
+              echo '<input class="form-control" type="text" name="nick_propietario" value="' . $_SESSION['session_user'] . '" readonly><br>';
+            }
+             ?>
+          </select>
+          <button style="background-color: rgba(60, 202, 38, 0.8);" class="hoverlink modifica_button" alt="Aggiungi" type="submit" name="aggiungi"><i style="color: rgb(0, 100, 0)" class="fas fa-plus"></i></button>
+        </form>
+      </div>
+    </div>
    </header>
   </body>
 </html>

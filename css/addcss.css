@@ -54,6 +54,9 @@ main h3{
   border: none;
   outline:none;
 }
+#form_aggiungi{
+  display: none;
+}
 .dropdown-toggle { outline: 0; }
 
 .nav-flush .nav-link {

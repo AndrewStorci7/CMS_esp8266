@@ -53,6 +53,15 @@ function deleteDisp(id){
   }
 }
 
+function seeAggiungi(){
+  const aggiungi_form = document.getElementById('form_aggiungi');
+  if(aggiungi_form.style.display == 'none'){
+    aggiungi_form.style.display = 'block';
+  } else {
+    aggiungi_form.style.display = 'none';
+  }
+}
+
 /*
 function modifyDisp(id){
   if (id == 0) {
