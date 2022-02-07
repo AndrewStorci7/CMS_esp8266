@@ -46,6 +46,7 @@ if(isset($_SESSION['session_id'])){
                          WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
       $id_chart = "myChart";
       $script = '<script src="../js/canvas.js" type="text/javascript"></script>';
+      $link_href = "?link=userdata&pagina=";
       break;
     case "alluserdata":
     /*
@@ -59,6 +60,7 @@ if(isset($_SESSION['session_id'])){
       $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
       $id_chart = "myChartAllData";
       $script = '<script src="../js/canvas_alldata.js" type="text/javascript"></script>';
+      $link_href = "?link=alluserdata&pagina=";
       break;
   }
 
@@ -80,14 +82,17 @@ if(isset($_SESSION['session_id'])){
       </div>
       <div class='row' style='margin-top: 40px; margin-right: 10%;'>
         <div class='container'>
-              <table class='table table-dark table-striped' style='margin-left: 20px; heigth: 700px;'>
+          <center><h2>Tabella dei dati delle temperature</h2></center>
+            <table class='table' style='margin-left: 20px; heigth: 700px;'>
+              <thead class='table-dark'>
                 <tr>
                   <th>#</th>
                   <th>Temperatura</th>
                   <th>Nome disp</th>
                   <th>Nickname User</th>
                   <th>Data e ora</th>
-                </tr>";
+                </tr>
+              </thead><tbody>";
 
       while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
           $index++;
@@ -104,14 +109,14 @@ if(isset($_SESSION['session_id'])){
           <td>' . $data_time . '</td>
           </tr>';
       }
-      echo '</table></div></div>';
+      echo '</tbody></table></div></div>';
       echo '<div id="tabelladati" class="row pagine"><br><center>';
 
       if($pagina > 1){
-        echo ' <a class="meno" href="?link=alluserdata&pagina='. ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
+        echo ' <a class="meno" href="' . $link_href . ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
       }
       if($num_pagine > $pagina){
-          echo '<a class="piu" href="?link=alluserdata&pagina='. ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
+          echo '<a class="piu" href="' . $link_href . ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
       }
   }
   echo '</center><br></div>' . $script;

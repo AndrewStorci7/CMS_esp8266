@@ -13,7 +13,7 @@ if(isset($_SESSION['session_id'])){
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="ESP8266, esp, esp8266, arduino, CMS, pannell, pannello di controllo, control pannell, ARDUINO, WiFi, wifi, Project, progetto, scuola, school">
+    <meta name="keywords" content="ESP8266, esp, esp8266, arduino, CMS, panel, pannello di controllo, control panel, ARDUINO, WiFi, wifi, Project, progetto, scuola, school">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/logo_small_icon_only.ico">
     <!--<link rel="stylesheet" href="cssFontawesome/all.css">-->
@@ -44,18 +44,6 @@ if(isset($_SESSION['session_id'])){
                   Home
                 </a>
               </li>
-              <li>
-                <a href="#" class="nav-link text-white" id="data_navbar" onclick="paginaSelector(this.id)">
-                  <i class="far fa-chart-bar"></i>
-                  Data
-                </a>
-              </li>
-              <li>
-                <a href="settings.php" class="nav-link text-white" id="settings_navbar" onclick="paginaSelector(this.id)">
-                  <i class="fas fa-cog"></i>
-                  Settings
-                </a>
-              </li>
               <?php
               if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
                ?>
@@ -65,9 +53,21 @@ if(isset($_SESSION['session_id'])){
                   Users data
                 </a>
               </li>
+              <li>
+                <a href="profile.php" class="nav-link text-white" id="alluserdata_navbar" onclick="paginaSelector(this.id)">
+                  <i class="fas fa-users-cog"></i>
+                  Profiles users
+                </a>
+              </li>
               <?php
               }
                ?>
+              <li>
+                <a href="settings.php" class="nav-link text-white" id="settings_navbar" onclick="paginaSelector(this.id)">
+                  <i class="fas fa-cog"></i>
+                  Settings
+                </a>
+              </li>
               <li>
                 <a href="profile.php" class="nav-link text-white" id="profile_navbar" onclick="paginaSelector(this.id)">
                   <img alt="Foto profilo" style="border-radius: 600px; margin-left: -3px; margin-right: 3px;" src="../img/immagini_utenti/logo_NFT.png" width="30px" height="30px">

@@ -1,8 +1,8 @@
 <?php
 require_once("../config.php");
 
-if(isset($_POST['ID'])){
-    $ID = intval($_POST['ID']);
+if(isset($_GET['id_disp'])){
+    $ID = intval($_GET['id_disp']);
 }else{
     $ID = 0;
 }

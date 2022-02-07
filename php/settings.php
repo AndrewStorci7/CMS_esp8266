@@ -115,20 +115,20 @@ if(isset($_SESSION['session_id'])){
 
             <?php
             if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
-              echo '<select class="form-select" aria-label="Scegli utente">
+              echo '<select name="nick_propietario" class="form-select" aria-label="Scegli utente">
                 <option selected>Scegli un utente</option>';
               $select_u = "SELECT nick
                            FROM utenti";
               $res_select = $pdo->query($select_u);
               while($righe = $res_select->fetch(PDO::FETCH_ASSOC)){
-                echo "<option name='nick_propietario' value='" . $righe['nick'] . "'>" . $righe['nick'] . "</option>";
+                echo "<option  value='" . $righe['nick'] . "'>" . $righe['nick'] . "</option>";
               }
             } elseif (isset($_SESSION['session_role']) && $_SESSION['session_role'] == 2){
               echo '<input class="form-control" type="text" name="nick_propietario" value="' . $_SESSION['session_user'] . '" readonly><br>';
             }
              ?>
           </select>
-          <button style="background-color: rgba(60, 202, 38, 0.8);" class="hoverlink modifica_button" alt="Aggiungi" type="submit" name="aggiungi"><i style="color: rgb(0, 100, 0)" class="fas fa-plus"></i></button>
+          <button style="background-color: rgba(60, 202, 38, 0.8); border-radius: 0 0 5px 5px" class="hoverlink modifica_button" alt="Aggiungi" type="submit" name="aggiungi"><i style="color: rgb(0, 100, 0)" class="fas fa-plus"></i></button>
         </form>
       </div>
     </div>

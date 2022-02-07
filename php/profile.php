@@ -56,10 +56,26 @@ if(isset($_SESSION['session_id'])){
             </div>
         </nav>
         <?php
-        $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
-                  FROM utenti JOIN ruoli
-                  ON utenti.ruolo = ruoli.id
-                  WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
+
+        $role = isset($_SESSION['session_role']) ? $_SESSION['session_role'] : '2';
+        switch ($role) {
+          case 1:
+            $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
+                      FROM utenti JOIN ruoli
+                      ON utenti.ruolo = ruoli.id
+                      ORDER BY utenti.id";
+            $readonly = "";
+            break;
+
+          case 2:
+            $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
+                      FROM utenti JOIN ruoli
+                      ON utenti.ruolo = ruoli.id
+                      WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
+            $readonly = "readonly";
+            break;
+        }
+
 
         echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
                 <center><h2 class='titolo_pagdispositivi'>Gestione profilo</h2></center>";
@@ -69,7 +85,7 @@ if(isset($_SESSION['session_id'])){
         //include_once 'settings_functions/visualizza_foto.php';
         while($risultato = $pre->fetch()){
           echo '<div class="row div_dispositivi">
-                  <h3 class="titolo_dispositivi">Impostazioni del profilo</h3>
+                  <h3 class="titolo_dispositivi">Impostazioni del profilo ' . $risultato['nc'] . '</h3>
                     <form enctype="multipart/form-data" method="post" action="settings_functions/foto.php">
                       <label for="exampleInputEmail1" class="form-label">Foto profilo</label><br>
                       <input type="hidden" name="MAX_FILE_SIZE" value="30000">
@@ -83,7 +99,7 @@ if(isset($_SESSION['session_id'])){
                       <label for="exampleInputEmail1" class="form-label">Nickname</label>
                       <input class="form-control" type="text" name="nick" value="' . $risultato['nick'] . '">
                       <label for="exampleInputEmail1" class="form-label">Ruolo</label>
-                      <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
+                      <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" ' . $readonly . '>
                       <p style="font-size: 12px">Solo l\'amministratore può modificare i permessi</p>
                       <br>
                       <button class="hoverlink modifica_button" alt="Modifica" type="submit" name="modifica"><i class="fas fa-user-edit"></i></button>

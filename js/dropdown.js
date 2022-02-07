@@ -44,7 +44,7 @@ function deleteDisp(id){
     };
     var annulla = window.confirm("Sei sicuro ?");
     if(annulla){
-      xmlhttp.open("GET", "settings_functions/delete.php?ID=" + id, true);
+      xmlhttp.open("GET", "settings_functions/delete.php?id_disp=" + id, true);
       xmlhttp.send();
     } else {
       xmlhttp.abort();
