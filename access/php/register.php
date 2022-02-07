@@ -53,10 +53,11 @@ if (isset($_POST['register'])) {
         $query = "
             SELECT id
             FROM utenti
-            WHERE email = :email";
+            WHERE email = :email OR nick = :nick";
 
         $check = $pdo->prepare($query);
         $check->bindParam(':email', $email, PDO::PARAM_STR);
+        $check->bindParam(':nick', $nick, PDO::PARAM_STR);
         $check->execute();
 
         $user = $check->fetchAll(PDO::FETCH_ASSOC);

@@ -2,6 +2,13 @@
 session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
+  $errormsg = isset($_GET['errormsg']) ? $_GET['errormsg'] : '';
+  strval($errormsg);
+  if($errormsg == 'nickesist'){
+    echo "<script>alert('Il nickname inserito è già esistente');</script>";
+  } else if($errormsg == 'riempireicampi'){
+    echo "<script>alert('Per modificare devi riempire il campo');</script>";
+  }
  ?>
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -60,29 +67,27 @@ if(isset($_SESSION['session_id'])){
         $role = isset($_SESSION['session_role']) ? $_SESSION['session_role'] : '2';
         switch ($role) {
           case 1:
-            $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
+            $query = "SELECT utenti.id, utenti.nc, utenti.nick, utenti.email, ruoli.nome_r, utenti.pw
                       FROM utenti JOIN ruoli
                       ON utenti.ruolo = ruoli.id
                       ORDER BY utenti.id";
-            $display = "style='display: none;'";
-            $display2 = "style='display: block;'";
+            $display = "display: none;";
+            $display2 = "display: block;";
             break;
 
           case 2:
-            $query = "SELECT utenti.nc, utenti.nick, ruoli.nome_r, utenti.pw
+            $query = "SELECT utenti.id, utenti.nc, utenti.nick, utenti.email, ruoli.nome_r, utenti.pw
                       FROM utenti JOIN ruoli
                       ON utenti.ruolo = ruoli.id
                       WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
-            $readonly = "readonly";
-            $display = "style='display: block;'";
-            $display2 = "style='display: none;'";
+            $display = "display: block;";
+            $display2 = "display: none;";
             break;
         }
 
 
         echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
                 <center><h2 class='titolo_pagdispositivi'>Gestione profilo</h2></center>";
-
 
         $pre = $pdo->query($query);
         //include_once 'settings_functions/visualizza_foto.php';
@@ -95,15 +100,30 @@ if(isset($_SESSION['session_id'])){
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
                     </form>
-                    <form method="post" action="settings_functions/modify.php?type=profile">
+                    <form method="post" action="settings_functions/modify.php?type=profile&id_u=' . $risultato['id'] . '">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>
                       <input class="form-control" type="text" name="nc" value="' . $risultato['nc'] . '">
 
                       <label for="exampleInputEmail1" class="form-label">Nickname</label>
                       <input class="form-control" type="text" name="nick" value="' . $risultato['nick'] . '">
+                      <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                      <input class="form-control" type="email" name="email" value="' . $risultato['email'] . '">
                       <label for="exampleInputEmail1" class="form-label">Ruolo</label>
-                      <input class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" ' . $readonly . '>
-                      <p style="font-size: 12px">Solo l\'amministratore può modificare i permessi</p>
+                      <input style="' . $display . '" class="form-control" type="text" name="n_r" value="' . $risultato['nome_r'] . '" readonly>
+                      <select style="' . $display2 . '" name="slc_role" class="form-select" aria-label="Scegli ruolo">
+                        <option value="' . $risultato['nome_r'] . '" selected>' . $risultato['nome_r'] . '</option>';
+                      if($_SESSION['session_role'] == 1){
+                        $slc_roles = "SELECT nome_r FROM ruoli WHERE nome_r <> '" . $risultato['nome_r'] . "'";
+                        $res = $pdo->query($slc_roles);
+                        while($row = $res->fetch()){
+                          echo "<option value='" . $row['nome_r'] . "'>" . $row['nome_r'] . "</option>";
+                        }
+
+                      }
+
+
+          echo        '</select>
+                      <p style="font-size: 12px; ' . $display . '">Solo l\'amministratore può modificare i permessi</p>
                       <br>
                       <button class="hoverlink modifica_button" alt="Modifica" type="submit" name="modifica"><i class="fas fa-user-edit"></i></button>
                     </form>
