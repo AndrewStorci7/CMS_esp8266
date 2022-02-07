@@ -57,7 +57,7 @@ function seeAggiungi(){
   const aggiungi_form = document.getElementById('form_aggiungi');
   if(aggiungi_form.style.display == 'none'){
     aggiungi_form.style.display = 'block';
-  } else {
+  } else if (aggiungi_form.style.display == 'block') {
     aggiungi_form.style.display = 'none';
   }
 }

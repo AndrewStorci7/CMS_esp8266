@@ -46,7 +46,7 @@ if(isset($_SESSION['session_id'])){
                         <li><a href="../index.html" class="nav-item nav-link">Home</a></li>
                         <li><a href="index.php" class="nav-item nav-link">Torna al pannello</a></li>
                         <li class="dropdown">
-                            <a href="javascript:void();" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
+                            <a href="javascript:void(0);" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu">
                                 <a href="../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
                             </div>
@@ -64,7 +64,8 @@ if(isset($_SESSION['session_id'])){
                       FROM utenti JOIN ruoli
                       ON utenti.ruolo = ruoli.id
                       ORDER BY utenti.id";
-            $readonly = "";
+            $display = "style='display: none;'";
+            $display2 = "style='display: block;'";
             break;
 
           case 2:
@@ -73,6 +74,8 @@ if(isset($_SESSION['session_id'])){
                       ON utenti.ruolo = ruoli.id
                       WHERE utenti.nick = '" . $_SESSION['session_user'] . "'";
             $readonly = "readonly";
+            $display = "style='display: block;'";
+            $display2 = "style='display: none;'";
             break;
         }
 

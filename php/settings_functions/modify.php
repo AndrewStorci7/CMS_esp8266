@@ -15,6 +15,10 @@ switch ($type) {
     $pre->bindParam(':n_disp', $n_disp, PDO::PARAM_STR);
     $pre->bindParam(':id_disp', $id_disp, PDO::PARAM_INT);
     $header = 'Location: ../settings.php';
+    if((empty($n_disp) || $n_disp == 'undefined') || ($id_disp == 0)){
+      echo "<script>alert('Per modificare devi riempire il campo');</script>";
+      header($header);
+    }
     break;
 
   case 'profile':
@@ -29,17 +33,12 @@ switch ($type) {
     $pre->bindParam(':nick', $nick, PDO::PARAM_STR);
     $pre->bindParam(':email', $email, PDO::PARAM_STR);
     $header = 'Location: ../profile.php';
+    if((empty($nc) || $nc == 'undefined') || (empty($nick) || $nick == 'undefined') || (empty($email) || $email == 'undefined')){
+      echo "<script>alert('Per modificare devi riempire il campo');</script>";
+      header($header);
+    }
     break;
 }
-/*$query = "INSERT INTO tabella_file
-          VALUES nome = '$nome_file_vero',
-              tipo = '$tipo_file',
-              dati = '$dati_file'";*/
-
-if(($var1 == null || $var1 == 'undefined' || $var1 == "") || ($var2 == null || $var2 == 'undefined' || $var2 == "")){
-  echo "<script>alert('Per modificare devi riempire il campo');</script>";
-  header($header);
-} else {
   $pdo->execute($query);
   $_SESSION['session_user'] = $var2;
   header($header);
