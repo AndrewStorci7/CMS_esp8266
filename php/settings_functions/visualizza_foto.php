@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once('../config.php');
+//session_start();
+require_once('config.php');
   $query = "SELECT files.nome_foto
             FROM files
             JOIN utenti ON files.id = utenti.foto
@@ -11,7 +11,6 @@ require_once('../config.php');
 
   while($row = $result->fetch(PDO::FETCH_ASSOC)){
       $addres = $row['nome_foto'];
-      echo $addres;
   }
   //header('Location: ../index.php');
  ?>

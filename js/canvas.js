@@ -26,10 +26,10 @@ async function getChart(){
   const myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ore,//[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24], inserire le date
+          labels: ore,
           datasets: [{
               label: 'Temperature registrate nell\'ultimo periodo',
-              data: temperature, // inserire i dati delle temperature
+              data: temperature,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)'
                   /*'rgba(54, 162, 235, 0.2)',

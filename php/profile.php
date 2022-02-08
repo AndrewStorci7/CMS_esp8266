@@ -94,9 +94,9 @@ if(isset($_SESSION['session_id'])){
         while($risultato = $pre->fetch()){
           echo '<div class="row div_dispositivi">
                   <h3 class="titolo_dispositivi">Impostazioni del profilo ' . $risultato['nc'] . '</h3>
-                    <form enctype="multipart/form-data" method="post" action="settings_functions/foto.php">
+                    <form enctype="multipart/form-data" method="post" action="settings_functions/foto.php?id_u=' . $risultato['id'] . '">
                       <label for="exampleInputEmail1" class="form-label">Foto profilo</label><br>
-                      <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                      <input type="hidden" name="MAX_FILE_SIZE" value="300000">
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
                     </form>
