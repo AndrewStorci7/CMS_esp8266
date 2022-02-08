@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('config.php');
+require_once('settings_functions/visualizza_foto.php');
 if(isset($_SESSION['session_id'])){
   $errormsg = isset($_GET['errormsg']) ? $_GET['errormsg'] : '';
   strval($errormsg);
@@ -99,6 +100,14 @@ if(isset($_SESSION['session_id'])){
                       <input type="hidden" name="MAX_FILE_SIZE" value="300000">
                       <input type="file" name="foto"><br>
                       <input style="margin: 5px 5px 10px auto;" type="submit" name="upload" value="Salva">
+                      <img src="../';
+          $slc_all_foto = "SELECT nome_foto FROM utenti JOIN files ON utenti.foto = files.id WHERE utenti.id = " . $risultato['id'];
+          $result_slc = $pdo->query($slc_all_foto);
+          while($riga = $result_slc->fetch(PDO::FETCH_ASSOC)){
+              $addres_all = $riga['nome_foto'];
+              echo $addres_all;
+          }
+          echo '" width="200px" height="auto" style="float: right;">
                     </form>
                     <form method="post" action="settings_functions/modify.php?type=profile&id_u=' . $risultato['id'] . '">
                       <label for="exampleInputEmail1" class="form-label">Nome completo</label>

@@ -12,5 +12,7 @@ require_once('config.php');
   while($row = $result->fetch(PDO::FETCH_ASSOC)){
       $addres = $row['nome_foto'];
   }
+
+
   //header('Location: ../index.php');
  ?>
