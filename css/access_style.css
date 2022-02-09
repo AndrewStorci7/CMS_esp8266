@@ -6,3 +6,26 @@ body{
 .add_display{
   display: block !important;
 }
+div,
+input {
+  font-family: arial, verdana;
+  font-size: 12px;
+}
+.corretto,
+.errore {
+  padding: 3px;
+  text-align: center;
+}
+.corretto,
+.errore {
+  width: auto;
+  font-weight: bold;
+  border: 1px solid #349534;
+  background: #C9FFCA;
+  color: #008000;
+}
+.errore {
+  border: 1px solid #CC0000;
+  background: #F7CBCA;
+  color: #CC0000;
+}

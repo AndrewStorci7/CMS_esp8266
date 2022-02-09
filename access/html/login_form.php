@@ -1,7 +1,49 @@
 <?php
-include_once('../php/login.php');
+require_once('../../php/config.php');
 
-$msg = isset($_GET['msg']) ? $_GET['msg'] : "";
+if (isset($_SESSION['session_id'])) {
+    header('Location: ../../php/index.php?link=userdata');
+    exit;
+}
+
+if (isset($_POST['login'])) {
+    $nick = $_POST['nick']; //?? '';
+    $password = $_POST['pw']; //?? '';
+
+    if (empty($nick)) {
+        //header('Location: ../html/login_form.php?msg=err1');
+    } else if(empty($password)) {
+        //header('Location: ../html/login_form.php?msg=err2');
+    }else{
+        $query = "
+            SELECT nick, pw, ruolo
+            FROM utenti
+            WHERE nick = :nick
+        ";
+
+        $check = $pdo->prepare($query);
+        $check->bindParam(':nick', $nick, PDO::PARAM_STR);
+        //$check->bindParam(':pw', $pw, PDO::PARAM_STR);
+        $check->execute();
+
+        $user = $check->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user || ($user['pw'] != $password)) {
+            //header('Location: ../html/login_form.php?msg=err3');
+        } else {
+            session_regenerate_id();
+            $_SESSION['session_id'] = session_id();
+            $_SESSION['session_user'] = $user['nick'];
+            $_SESSION['session_role'] = $user['ruolo'];
+
+
+            header('Location: ../../php/index.php?link=userdata');
+            exit;
+        }
+    }
+}
+
+/*$msg = isset($_GET['msg']) ? $_GET['msg'] : "";
 strval($msg);
 $errmsg = "";
 $classerr = "";
@@ -20,7 +62,7 @@ switch ($msg) {
     $errmsg = "<p style='color: red; font-size: 12px;'>Inserire il nickname</p>";
     $classerr = "is-invalid";
     break;
-}
+}*/
  ?>
 <!DOCTYPE html>
 <html>
@@ -35,11 +77,12 @@ switch ($msg) {
     <body>
       <div class="container-fluid">
         <center>
-        <form class="form-floating" method="post" action="../php/login.php">
+        <form class="form-floating" id="loginform" method="post" action="login_form.php">
             <h1>Login</h1>
-            <input type="text" class="form-control <?php echo $classerr; ?> " id="nick" placeholder="Nickname" name="nick" required>
-            <input type="password" class="form-control <?php echo $classerr; ?> " id="pw" placeholder="Password" name="pw" required>
-            <?php echo $errmsg; ?>
+            <input type="text" class="form-control" id="nick" placeholder="Nickname" name="nick" required>
+            <input type="password" class="form-control" id="pw" placeholder="Password" name="pw" required>
+            <p id="msg"></p>
+
             <button type="submit" name="login">Accedi</button>
             <center>
               <p>Se non sei registrato, <a href="register_form.php">registrati</a></p>
