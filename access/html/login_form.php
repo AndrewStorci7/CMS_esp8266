@@ -6,14 +6,17 @@ if (isset($_SESSION['session_id'])) {
     exit;
 }
 
+$error = "";
+
 if (isset($_POST['login'])) {
     $nick = $_POST['nick']; //?? '';
     $password = $_POST['pw']; //?? '';
+    $password_check = md5(md5($password));
 
     if (empty($nick)) {
-        //header('Location: ../html/login_form.php?msg=err1');
+        exit(1);
     } else if(empty($password)) {
-        //header('Location: ../html/login_form.php?msg=err2');
+        exit(2);
     }else{
         $query = "
             SELECT nick, pw, ruolo
@@ -28,14 +31,13 @@ if (isset($_POST['login'])) {
 
         $user = $check->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user || ($user['pw'] != $password)) {
-            //header('Location: ../html/login_form.php?msg=err3');
+        if (!$user || ($user['pw'] !== $password_check)) {
+            exit(3);
         } else {
             session_regenerate_id();
             $_SESSION['session_id'] = session_id();
             $_SESSION['session_user'] = $user['nick'];
             $_SESSION['session_role'] = $user['ruolo'];
-
 
             header('Location: ../../php/index.php?link=userdata');
             exit;
@@ -71,19 +73,21 @@ switch ($msg) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
         <link rel="shortcut icon" href="../../img/logo_small_icon_only.ico">
         <link rel="stylesheet" href="../../bootstrap-5.1.3-dist/css/bootstrap.css">
-        <link rel="stylesheet" href="../../css/style_2.css">
-        <link rel="stylesheet" href="../../css/access_style.css">
+        <link rel="stylesheet" href="../../css/style_2.css?ts=<?=time()?>&quot">
+        <link rel="stylesheet" href="../../css/access_style.css?ts=<?=time()?>&quot">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script type="text/javascript" src="../../js/script.js?ts=<?=time()?>&quot"></script>
     </head>
     <body>
       <div class="container-fluid">
         <center>
-        <form class="form-floating" id="loginform" method="post" action="login_form.php">
+        <form class="form-floating" id="form" method="post" action="login_form.php">
             <h1>Login</h1>
             <input type="text" class="form-control" id="nick" placeholder="Nickname" name="nick" required>
             <input type="password" class="form-control" id="pw" placeholder="Password" name="pw" required>
-            <p id="msg"></p>
+            <?php echo $error; ?>
 
-            <button type="submit" name="login">Accedi</button>
+            <input type="button" id="submit" name="login" value="Accedi"><br>
             <center>
               <p>Se non sei registrato, <a href="register_form.php">registrati</a></p>
             </center>

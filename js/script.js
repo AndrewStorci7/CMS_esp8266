@@ -32,29 +32,85 @@ jQuery(function($) {
 	adjustNav();
 });
 
-$("#loginform").submit(function() {
-  // passo i dati (via POST) al file PHP che effettua le verifiche
-  $.post("login.php", { nick: $('#nick').val(), pw: $('#pw').val() }, function(risposta) {
-    // se i dati sono corretti...
-    if (risposta == 1) {
-      // applico l'effetto allo span con id "messaggio"
-      $("#msg").fadeTo(200, 0.1, function() {
-        // per prima cosa mostro, con effetto fade, un messaggio di attesa
-        $(this).removeClass().addClass('corretto').text('Login in corso...').fadeTo(900, 1, function() {
-          // al termine effettuo il redirect alla pagina privata
-          document.location = '../../php/index.php';
-        });
-      });
-    // se, invece, i dati non sono corretti...
-    }else{
-      // stampo un messaggio di errore
-      $("#msg").fadeTo(200, 0.1, function() {
-        $(this).removeClass().addClass('errore').text('Dati di login non corretti!').fadeTo(900,1);
-        $('#pw').removeClass().addClass('is-invalid');
-        $('#nick').removeClass().addClass('is-invalid');
-      });
+$(document).ready(function(){
+  $('#submit').on('click', function(){
+    var form = $(this).parents('form');
+    var url = form.attr('action');
+    console.log(url);
+    if(form.attr('id') == 'register_form'){
+      var nc = $('#nomecompleto').val();
+      var nick = $('#nick').val();
+      var email = $('#email').val();
+      var pw = $('#pw').val();
+      var data = 'nc=' + nc + '&nick=' + nick + '&email=' + email + '&pw=' + pw;
+      console.log(data);
+    } else if(form.attr('id') == 'login_form'){
+      var nick = $('#nick').val();
+      var pw = $('#pw').val();
+      var data = 'nick=' + nick + '&pw=' + pw;
+      console.log(data);
     }
+
+    $.ajax({
+        method: 'POST',
+        dataType: 'JSON',
+        url: url,
+        data: data,
+        success: function(response){
+          form.find(':submit').attr('disabled', false);
+          if (response.err_stat == 1) {
+            form.find('small').text('');
+            // If validation error exists
+            for (var key in response) {
+              var errorContainer = form.find(`#${key}error`);
+              if (errorContainer.length !== 0) {
+                errorContainer.html(response[key]);
+              }
+            }
+          }
+          if (response.stato == 1) {
+            form.trigger('reset');
+            form.find('small').text('');
+            // handling success respone
+            toastr.success(response.msg);
+            setTimeout(function() {
+              window.location.href = '../access/html/login_form.php'
+            })
+          } else if (response.stato == 0) {
+            // Handling failure response
+            toastr.error(response.msg);
+          }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          console.log(xhr.responseText);
+        }
+    });
   });
-  // evito il submit del form (che deve essere gestito solo dalla funzione Javascript)
-  return false;
 });
+
+// LOGIN ASINCRONO
+/*$(function() {
+	$('#loginform').submit(function(event) {
+		var $form = $(this);
+		var url = $form.attr('action');
+		var nick = $('#nick', $form).val();
+		var pw = $('#pw', $form).val();
+		var data = 'nick=' + nick + '&pw=' + pw;
+		$.ajax({
+			type: 'POST',
+			dataType: 'text',
+			url: url,
+			data: data,
+			success: function(html) {
+				$('p.message', $form).remove();
+				//$(html).prependTo($('form', $form));
+        window.location = '../../php/index.php?link=userdata';
+			},
+      error: function(html){
+        $('p.message', $form).add();
+      }
+		});
+
+		//event.preventDefault();
+	});
+});*/
