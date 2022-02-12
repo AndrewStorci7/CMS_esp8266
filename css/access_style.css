@@ -16,10 +16,28 @@ body{
 	padding: 0.5em 0.5em 0.5em 40px;
 	color: #c30;
 }
-.message {
+.msg {
+  display: none;
 	background-color: #eee;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin-bottom: 1em;
 	width: 200px;
+}
+.errmsg{
+  display: none;
+  background-color: #ffc2c2;
+  border: 1px solid #ff3333;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 3px;
+}
+.fa-circle-exclamation{
+  float: right !important;
+  color: red !important;
+  font-size: 20px;
+  padding-top: 2px;
+}
+.mod_form{
+  border: none !important;
 }

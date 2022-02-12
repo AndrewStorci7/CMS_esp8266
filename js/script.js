@@ -32,7 +32,9 @@ jQuery(function($) {
 	adjustNav();
 });
 
-$(document).ready(function(){
+
+
+/*$(document).ready(function(){
   $('#submit').on('click', function(){
     var form = $(this).parents('form');
     var url = form.attr('action');
@@ -86,7 +88,7 @@ $(document).ready(function(){
         }
     });
   });
-});
+});*/
 
 // LOGIN ASINCRONO
 /*$(function() {
