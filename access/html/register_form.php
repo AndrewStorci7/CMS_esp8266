@@ -1,10 +1,7 @@
 <?php
 require_once('../../php/config.php');
 
-if (isset($_POST['register'])) {
-    $error = array(
-      'err_stat' => 0
-    );
+if (isset($_POST['submit'])) {
 
     $nc = $_POST['nomecompleto']; //?? '';
     $nick = $_POST['nick']; //?? '';
@@ -33,23 +30,25 @@ if (isset($_POST['register'])) {
     $pwdLenght = mb_strlen($password);
 
     if(empty($nc)){
-        $error['err_stat'] = 1;
-        $error['nc'] = 'Il campo nome completo è obbligatorio.';
+        $error = 1;
+        // nomecompleto vuoto
     } else if (empty($nick)) {
-        $error['err_stat'] = 1;
-        $error['nick'] = 'Il campo Nickname è obbligatorio.';
-    } elseif(empty($password)) {
-        $error['err_stat'] = 1;
-        $error['pw'] = 'Il campo Password è obbligatorio.';
-    } elseif (false === $isNickValid) {
-        $error['err_stat'] = 1;
-        $error['nick'] = 'Il Nickname inserito non è valido.';
-    } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $error['err_stat'] = 1;
-        $error['pw'] = 'la password deve essere più di 8 caratteri.';
+        $error = 2;
+        // nick vuoto
+    } else if(empty($password)) {
+        $error = 3;
+        //pw vuota
+    } else if(empty($email)) {
+        $error = 4;
+        // email vuota
+    } else if (false === $isNickValid) {
+        $error = 5;
+        // nickname non valido
+    } else if ($pwdLenght < 8 || $pwdLenght > 20) {
+        $error = 6;
+        // passowrd corta o troppo lunga
     } else {
         $password_hash = md5(md5($password));
-        //echo $password_hash;
 
         $query = "
             SELECT id
@@ -64,8 +63,8 @@ if (isset($_POST['register'])) {
         $user = $check->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($user) > 0) {
-            $error['err_stat'] = 1;
-            $error['nick'] = 'Nickname o E-mail già in uso.';
+            $error = 7;
+            //nickname o email già in uso
         } else {
             $query = "
                 INSERT INTO utenti(nick, email, pw, nc)
@@ -80,24 +79,13 @@ if (isset($_POST['register'])) {
             $check->execute();
 
             if ($check->rowCount() > 0) {
-                $response = array(
-                  'stato' => 1,
-                  'msg' => 'Registrazione avvenuta con successo!'
-                );
+                $error = 0;
+                //registrazione riuscita
             } else {
-                $response = array(
-                  'stato' => 0,
-                  'msg' => 'Registrazione fallita!'
-                );
+                //registrazione fallita
+                $error = 9;
             }
-            echo json_encode($response);
-            exit();
         }
-    }
-
-    if($error['err_stat'] > 0){
-        echo json_encode($error);
-        exit();
     }
 }
  ?>
@@ -127,24 +115,58 @@ if (isset($_POST['register'])) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
         <link rel="stylesheet" href="../../css/style_2.css">
         <link rel="stylesheet" href="../../css/access_style.css">
+<script type="text/javascript">
+//al click sul bottone "Login" del form----
+$(document).ready(function(){
+  $('#submit').click(function(){
+      var nc = $("#nomecompleto").val();
+      var nick = $("#nick").val();
+      var email = $("#email").val();
+      var pw = $("#pw").val();
+      var credenziali = 'nc=' + nc + '&nick=' + nick + '&email=' + email + '&pw=' + pw;
+
+      //chiamata ajax al controllo credenziali
+      $.ajax({
+          type: "POST",
+          url: "register_form.php",
+          data: credenziali,
+          success: function(risposta){
+              if(risposta > 0){
+                  alert("Credenziali non valide");
+              } else if(risposta == 0) {
+                alert("Credenziali  valide, Complimenti");
+                /* se le credenziali sono valide al posto del messaggio si richiama la pagina a cui si vole accedere con ad esempio:  window.location = "index.php";*/
+              }
+              //document.getElementById("register_form").reset();
+          },
+          error: function(){
+              alert("Chiamata AJAX fallita");
+          }
+
+      });
+      return false;
+  });
+});
+</script>
+
     </head>
     <body>
       <div class="container">
         <form id="register_form" method="post" action="">
             <h1>Registrazione</h1>
             <input type="text" id="nomecompleto" placeholder="Nome completo" name="nomecompleto" maxlength="50" required>
-            <small id="ncerror"></small>
+            <!--<small id="ncError"></small>-->
 
             <input type="text" id="nick" placeholder="Nickname" name="nick" maxlength="50" required>
-            <small id="nickerror"></small>
+            <!--<small id="nickError"></small>-->
 
             <input type="email" id="email" placeholder="E-mail" name="email" maxlength="50" required>
-            <small id="emailerror"></small>
+            <!--<small id="emailError"></small>-->
 
             <input type="password" id="pw" placeholder="Password" name="pw" required>
-            <small  id="pwerror"></small>
+            <div id="errormessage"></div>
 
-            <button type="submit" id="submit" name="register">Registrati</button>
+            <input type="submit" id="submit" name="submit" value="Registrati">
             <center>
               <p>Se sei già registrato, <a href="login_form.php">accedi</a></p>
             </center>
