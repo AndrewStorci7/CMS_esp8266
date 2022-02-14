@@ -22,18 +22,37 @@
         <script type="text/javascript" src="../../js/dropdown.js?ts=<?=time()?>&quot"></script>
         <link rel="stylesheet" href="../../css/addcss.css?ts=<?=time()?>&quot">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
-        <link rel="stylesheet" href="../../css/style_2.css">
-        <link rel="stylesheet" href="../../css/access_style.css">
+        <link rel="stylesheet" href="../../css/style_2.css?ts=<?=time()?>&quot">
+        <link rel="stylesheet" href="../../css/access_style.css?ts=<?=time()?>&quot">
     </head>
-    <body>
+    <body style="overflow-y: hidden !important;">
+
+      <div id="succfinalmsg" class="succ-reg-msg">
+        <i style="color: #33ff33" class="fa-solid fa-circle-check reg-fa"></i>Registrazione avvenuta
+      </div>
+      <div id="errfinalmsg" class="err-reg-cmsg">
+        <i class="fa-solid fa-circle-exclamation reg-fa"></i>Registrazione fallita!
+      </div>
       <div class="container">
         <form class="div_dispositivi mod_form" id="register_form" method="post" action="">
             <center><h3 class="titolo_dispositivi">Registrazione</h3></center>
             <div class="errmsg"><i class='fa-solid fa-circle-exclamation'></i></div>
-            <input type="text" id="nomecompleto" placeholder="Nome completo" name="nomecompleto" maxlength="50" required>
-            <input type="text" id="nick" placeholder="Nickname" name="nick" maxlength="50" required>
-            <input type="email" id="email" placeholder="E-mail" name="email" maxlength="50" required>
-            <input type="password" id="pw" placeholder="Password" name="pw" required>
+            <div class="form-floating mb-3">
+                <input type="text" id="nomecompleto" class="form-control" placeholder="Nome completo" name="nomecompleto" maxlength="50" required>
+                <label for="floatingInput">Nome completo</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" id="nick" class="form-control" placeholder="Nickname" name="nick" maxlength="50" required>
+                <label for="floatingInput">Nickname</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" id="email" class="form-control" placeholder="E-mail" name="email" maxlength="50" required>
+                <label for="floatingInput">E-mail</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" id="pw" class="form-control" placeholder="Password" name="pw" required>
+                <label for="floatingInput">Password</label>
+            </div>
 
             <input type="submit" id="submit" name="register" value="Registrati">
             <center>
@@ -45,6 +64,7 @@
             </center>
         </form>
       </div>
+
       <script type="text/javascript">
       $("#register_form").submit(function(){
         var nc = $("#nomecompleto").val();
@@ -55,17 +75,38 @@
           console.log(risposta);
           var div_msg_err = $(".errmsg");
           if(risposta == 8){
-            document.location = "../../php/index.php?link=alluserdata";
+            $('#succfinalmsg').fadeIn("slow");
+            $('#nomecompleto', '#nick', '#email', '#pw').val('');
           } else if(risposta == 1 || risposta == 2 || risposta == 3 || risposta == 4){
-            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation'></i>Tutti i campi vanno compilati");
+            switch (risposta) {
+              case 1:
+                var div = $("#nomecompleto");
+                break;
+              case 2:
+                var div = $("#nick");
+                break;
+              case 3:
+                var div = $("#email");
+                break;
+              case 4:
+                var div = $("#pw");
+                break;
+            }
+            div.addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Tutti i campi vanno compilati");
           } else if(risposta == 5){
-            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation'></i>Nickname non valido");
+            $("#nick").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Nickname non valido");
           } else if(risposta == 6){
-            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation'></i>La password deve essere di almeno 8 caratteri");
+            $("#pw").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>La password deve essere di almeno 8 caratteri");
           } else if(risposta == 7){
-            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation'></i>E-mail o Nickname già in uso");
+            $("#email").addClass('is-invalid');
+            $("#nick").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>E-mail o Nickname già in uso");
           } else if(risposta == 9){
-            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation'></i>Errore nella registrazione");
+            $('#errfinalmsg').fadeIn("slow");
+            $('#nomecompleto', '#nick', '#email', '#pw').val('');
           }
         });
         return false;

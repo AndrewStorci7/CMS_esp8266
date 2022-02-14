@@ -37,7 +37,8 @@ if (isset($_POST['login'])) {
             $_SESSION['session_user'] = $user['nick'];
             $_SESSION['session_role'] = $user['ruolo'];
 
-            header('Location: ../../php/index.php?link=userdata');
+            echo 4;
+            //header('Location: ../../php/index.php?link=userdata');
             exit;
         }
     }

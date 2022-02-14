@@ -16,14 +16,7 @@ form {
     width: 360px;
     margin: 30px auto;
 }
-input {
-	font: 14px 'Open Sans', sans-serif;
-    border: 2px solid #ccc;
-    padding: 6px;
-    display: block;
-	margin-bottom: 10px;
-    width: 96%;
-}
+
 button {
     font: 14px 'Open Sans', sans-serif;
     background-color: #4285f4;

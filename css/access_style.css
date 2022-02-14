@@ -11,11 +11,6 @@ body{
 	padding: 0.5em 0.5em 0.5em 40px;
 	color: #393;
 }
-.error {
-	background: url(img/error.png) no-repeat 0 50%;
-	padding: 0.5em 0.5em 0.5em 40px;
-	color: #c30;
-}
 .msg {
   display: none;
 	background-color: #eee;
@@ -27,12 +22,12 @@ body{
 .errmsg{
   display: none;
   background-color: #ffc2c2;
-  border: 1px solid #ff3333;
-  border-radius: 5px;
+  border: 2px solid #ff3333;
+  /*border-radius: 5px;*/
   margin: 3px;
   padding: 3px;
 }
-.fa-circle-exclamation{
+.fix-fa{
   float: right !important;
   color: red !important;
   font-size: 20px;
@@ -40,4 +35,33 @@ body{
 }
 .mod_form{
   border: none !important;
+}
+.succ-reg-msg{
+  display: none;
+  width: auto;
+  margin-top: 10px;
+  background-color: #70ff70;
+  border: 3px solid green;
+  padding: 7px;
+  border-radius: 5px 0 0 5px;
+  position: relative;
+  z-index: 9999;
+  float:right;
+}
+.err-reg-cmsg{
+  display: none;
+  width: auto;
+  margin-top: 10px;
+  background-color: #ff8585;
+  border: 3px solid red;
+  padding: 7px;
+  border-radius: 5px 0 0 5px;
+  position: relative;
+  z-index: 9999;
+  float:right;
+}
+.reg-fa{
+  width: auto;
+  height: auto;
+  margin: 3px;
 }
