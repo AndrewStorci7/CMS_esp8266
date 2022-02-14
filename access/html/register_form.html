@@ -18,7 +18,7 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://kit.fontawesome.com/557a090e67.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript" src="../../js/script.js"></script>
+        <script type="text/javascript" src="../../js/script.js?ts=<?=time()?>&quot"></script>
         <script type="text/javascript" src="../../js/dropdown.js?ts=<?=time()?>&quot"></script>
         <link rel="stylesheet" href="../../css/addcss.css?ts=<?=time()?>&quot">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
@@ -27,8 +27,8 @@
     </head>
     <body style="overflow-y: hidden !important;">
 
-      <div id="succfinalmsg" class="succ-reg-msg">
-        <i style="color: #33ff33" class="fa-solid fa-circle-check reg-fa"></i>Registrazione avvenuta
+      <div id="succfinalmsg" class="succ-reg-msg" onclick="hide()">
+        <i style="color: rgb(0, 215, 25)" class="fa-solid fa-circle-check reg-fa"></i>Registrazione avvenuta
       </div>
       <div id="errfinalmsg" class="err-reg-cmsg">
         <i class="fa-solid fa-circle-exclamation reg-fa"></i>Registrazione fallita!
@@ -79,11 +79,7 @@
           var div_msg_err = $(".errmsg");
           if(risposta == 8){
             $('#succfinalmsg').fadeIn("slow");
-            nc = '';
-            nick = '';
-            email = '';
-            pw = '';
-            $('#nomecompleto', '#nick', '#email', '#password').removeClass('is-invalid');
+            //$('#nomecompleto', '#nick', '#email', '#pw').val('');
             $('#errmsg').removeClass('add_display');
           } else if(risposta == 1 || risposta == 2 || risposta == 3 || risposta == 4){
             switch (risposta) {
@@ -101,21 +97,27 @@
                 break;
             }
             div.addClass('is-invalid');
+            $('#succfinalmsg').fadeOut();
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Tutti i campi vanno compilati");
           } else if(risposta == 5){
             $("#nick").addClass('is-invalid');
+            $('#succfinalmsg').fadeOut();
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Nickname non valido");
           } else if(risposta == 6){
             $("#pw").addClass('is-invalid');
+            $('#succfinalmsg').fadeOut();
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>La password deve essere di almeno 8 caratteri");
           } else if(risposta == 7){
             $("#email").addClass('is-invalid');
             $("#nick").addClass('is-invalid');
+            $('#succfinalmsg').fadeOut();
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>E-mail o Nickname già in uso");
           } else if(risposta == 9){
             $('#errfinalmsg').fadeIn("slow");
+            $('#succfinalmsg').fadeOut();
           } else if(risposta == 10){
             $("#email").addClass('is-invalid');
+            $('#succfinalmsg').fadeOut();
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>E-mail non valida");
           }
         });

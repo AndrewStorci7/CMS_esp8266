@@ -40,7 +40,7 @@ body{
   display: none;
   width: auto;
   margin-top: 10px;
-  background-color: #70ff70;
+  background-color: rgb(161, 255, 126);
   border: 3px solid green;
   padding: 7px;
   border-radius: 5px 0 0 5px;
@@ -88,4 +88,10 @@ body{
 #label_check{
   float: left !important;
   font-size: 12px;
+}
+.hide{
+  display: none !important;
+}
+.succ-reg-msg:hover{
+  cursor: pointer;
 }

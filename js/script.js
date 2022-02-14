@@ -41,6 +41,11 @@ function showPw() {
   }
 }
 
+function hide(){
+  const id = document.getElementById('succfinalmsg');
+  id.classList.add('hide');
+}
+
 
 /*$(document).ready(function(){
   $('#submit').on('click', function(){
