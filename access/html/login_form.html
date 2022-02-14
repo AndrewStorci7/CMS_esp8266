@@ -25,23 +25,31 @@
         <link rel="stylesheet" href="../../css/style_2.css?ts=<?=time()?>&quot">
         <link rel="stylesheet" href="../../css/access_style.css?ts=<?=time()?>&quot">
     </head>
-    <body>
+    <body style="overflow-y: hidden !important;">
       <div class="container">
         <center>
         <form class="div_dispositivi mod_form" id="login_form" method="post" action="">
+            <center>
+              <img class="fix-imglogo-access" src="../../img/logo/logo_small.png" alt="Logo Esp panel">
+            </center>
             <center><h3 class="titolo_dispositivi">Login</h3></center>
             <div class="errmsg"><i class='fa-solid fa-circle-exclamation'></i></div>
-            <div class="errmsg"></div>
-            <input type="text" class="form-control" id="nick" placeholder="Nickname" name="nick" required>
-            <input type="password" class="form-control" id="pw" placeholder="Password" name="pw" required>
+            <div class="form-floating mb-3">
+                <input type="text" id="nick" class="form-control" placeholder="Nickname" name="nick" maxlength="50" required>
+                <label for="floatingInput">Nickname</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" id="pw" class="form-control" placeholder="Password" name="pw" required>
+                <label for="floatingInput">Password</label>
+            </div>
 
-            <input type="submit" id="submit" name="login" value="Accedi"><br>
+            <input class="button-submit" type="submit" id="submit" name="login" value="Accedi"><br>
             <center>
-              <p>Se non sei registrato, <a href="register_form.html">registrati</a></p>
+              <p class="link-page">Se non sei registrato, <a href="register_form.html">registrati</a></p>
             </center>
             <br><br>
             <center>
-              <a href="../../index.html" alt="Back home (Sono un fan di spiderman)">Torna alla home</a>
+              <a href="../../index.html" alt="Back home (Sono un fan di spiderman)"><i class="fa-solid fa-house"></i> Torna alla home</a>
             </center>
         </form>
         </center>
@@ -56,11 +64,13 @@
           if(risposta == 4){
             window.location = '../../php/index.php?link=userdata';
           } else if(risposta == 1){
-            $("#nick").
+            $("#nick").addClass('is-invalid');
           } else if(risposta == 2){
-
+            $("#pw").addClass('is-invalid');
           } else if(risposta == 3){
-
+            $("#nick").addClass('is-invalid');
+            $("#pw").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Credenziali errate");
           }
         });
         return false;

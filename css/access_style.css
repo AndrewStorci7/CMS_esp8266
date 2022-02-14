@@ -65,3 +65,20 @@ body{
   height: auto;
   margin: 3px;
 }
+.button-submit{
+  width: 100%;
+  border: none !important;
+  margin-top: 7px;
+  margin-bottom: 13px;
+  background-color: #7dbbc3;
+}
+.link-page{
+  font-size: 12px;
+}
+.fix-imglogo-access{
+  width: 100%;
+  height: auto;
+  margin-left: -10px !important;
+  margin-top: -10px !important;
+  margin-right: -10px !important;
+}
