@@ -32,6 +32,14 @@ jQuery(function($) {
 	adjustNav();
 });
 
+function showPw() {
+  var input = document.getElementById('pw');
+  if (input.type === "password") {
+    input.type = "text";
+  } else {
+    input.type = "password";
+  }
+}
 
 
 /*$(document).ready(function(){

@@ -82,3 +82,10 @@ body{
   margin-top: -10px !important;
   margin-right: -10px !important;
 }
+.form-control{
+  height: 45px !important;
+}
+#label_check{
+  float: left !important;
+  font-size: 12px;
+}

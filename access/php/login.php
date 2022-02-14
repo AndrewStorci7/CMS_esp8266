@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../../php/config.php');
 
 if (isset($_SESSION['session_id'])) {
@@ -6,9 +7,9 @@ if (isset($_SESSION['session_id'])) {
     exit;
 }
 
-if (isset($_POST['login'])) {
-    $nick = $_POST['nick']; //?? '';
-    $password = $_POST['pw']; //?? '';
+//if (isset($_POST['login'])) {
+    $nick = $_POST['nick'] ?? '';
+    $password = $_POST['pw'] ?? '';
     $password_check = md5(md5($password));
 
     if (empty($nick)) {
@@ -42,7 +43,7 @@ if (isset($_POST['login'])) {
             exit;
         }
     }
-}
+//}
 
 /*$msg = isset($_GET['msg']) ? $_GET['msg'] : "";
 strval($msg);

@@ -136,5 +136,7 @@ if(isset($_SESSION['session_id'])){
   </body>
 </html>
 <?php
+} else {
+  header('Location: ../access/html/login_form.html');
 }
 ?>

@@ -18,7 +18,7 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://kit.fontawesome.com/557a090e67.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript" src="../../js/script.js"></script>
+        <script type="text/javascript" src="../../js/script.js?ts=<?=time()?>&quot"></script>
         <script type="text/javascript" src="../../js/dropdown.js?ts=<?=time()?>&quot"></script>
         <link rel="stylesheet" href="../../css/addcss.css?ts=<?=time()?>&quot">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
@@ -41,6 +41,10 @@
             <div class="form-floating mb-3">
                 <input type="password" id="pw" class="form-control" placeholder="Password" name="pw" required>
                 <label for="floatingInput">Password</label>
+            </div>
+            <div class="form-check" style="margin-bottom: 20px !important;">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="showPw()">
+                <label class="form-check-label" id="label_check" for="flexCheckDefault">Vedi password</label>
             </div>
 
             <input class="button-submit" type="submit" id="submit" name="login" value="Accedi"><br>
@@ -65,8 +69,10 @@
             window.location = '../../php/index.php?link=userdata';
           } else if(risposta == 1){
             $("#nick").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Tutti i campi vanno compilati");
           } else if(risposta == 2){
             $("#pw").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>Tutti i campi vanno compilati");
           } else if(risposta == 3){
             $("#nick").addClass('is-invalid');
             $("#pw").addClass('is-invalid');

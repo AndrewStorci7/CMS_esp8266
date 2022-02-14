@@ -2,7 +2,6 @@
 require_once('../../php/config.php');
 
 //if (isset($_POST['register'])) {
-    //$msg = "";
 
     $nc = $_POST['nomecompleto'] ?? '';
     $nick = $_POST['nick'] ?? '';
@@ -40,6 +39,8 @@ require_once('../../php/config.php');
         echo 4;
     } elseif (false === $isNickValid) {
         echo 5;
+    } elseif(false === $isEmailValid){
+        echo 10;
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
         echo 6;
         //Password corta

@@ -79,7 +79,12 @@
           var div_msg_err = $(".errmsg");
           if(risposta == 8){
             $('#succfinalmsg').fadeIn("slow");
-            $('#nomecompleto', '#nick', '#email', '#pw').val('');
+            nc = '';
+            nick = '';
+            email = '';
+            pw = '';
+            $('#nomecompleto', '#nick', '#email', '#password').removeClass('is-invalid');
+            $('#errmsg').removeClass('add_display');
           } else if(risposta == 1 || risposta == 2 || risposta == 3 || risposta == 4){
             switch (risposta) {
               case 1:
@@ -109,7 +114,9 @@
             div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>E-mail o Nickname già in uso");
           } else if(risposta == 9){
             $('#errfinalmsg').fadeIn("slow");
-            $('#nomecompleto', '#nick', '#email', '#pw').val('');
+          } else if(risposta == 10){
+            $("#email").addClass('is-invalid');
+            div_msg_err.addClass("add_display").html("<i class='fa-solid fa-circle-exclamation fix-fa'></i>E-mail non valida");
           }
         });
         return false;

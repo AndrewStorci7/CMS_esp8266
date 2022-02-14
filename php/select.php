@@ -122,7 +122,7 @@ if(isset($_SESSION['session_id'])){
   echo '</center><br></div>' . $script;
 
 } else {
-  header("Location: ../access/php/login.php");
+  header('Location: ../access/html/login_form.html');
 }
 
 ?>
