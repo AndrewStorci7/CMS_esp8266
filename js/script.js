@@ -32,6 +32,17 @@ jQuery(function($) {
 	adjustNav();
 });
 
+function paginaSelector(id){
+  var clicked = document.getElementById(id);
+  if(clicked == 'home_navbar'){
+      clicked.classList.add('active');
+      document.getElementById('alluserdata_navbar').classList.remove('active');
+  } else {
+      clicked.classList.add('active');
+      document.getElementById('home_navbar').classList.remove('active');
+  }
+}
+
 function showPw() {
   var input = document.getElementById('pw');
   if (input.type === "password") {
