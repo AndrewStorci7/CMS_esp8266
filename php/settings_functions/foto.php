@@ -14,19 +14,30 @@ $tmp_name = $_FILES['foto']['tmp_name'];
 $realname_file = $_FILES['foto']['name'];
 $path = $upload_path . $realname_file;
 if(move_uploaded_file($tmp_name, $path)){
-  $insert = "INSERT INTO files (nome_foto)
-             VALUES ('img/immagini_utenti/$realname_file')";
-  $res = $pdo->query($insert);
-
-  if(!$res) {
-    echo "errore nella query";
-  } else {
+  $check_double = "SELECT nome_foto FROM files WHERE nome_foto = 'img/immagini_utenti/$realname_file'";
+  $check = $pdo->query($check_double);
+  $checkAssoc = $check->fetchAll(PDO::FETCH_ASSOC);
+  if(count($checkAssoc) > 0){
     $update_foto_user = "(SELECT id FROM files WHERE nome_foto = 'img/immagini_utenti/" . $realname_file . "' ORDER BY id LIMIT 1)";
     $update_foto = "UPDATE utenti
                     SET foto = " . $update_foto_user . "
                     WHERE id = " . $get_id_u . "";
     $update_foto = $pdo->query($update_foto);
-    header('Location: ../profile.php');
+    header('Location: ../index.php?link=profile');
+  } else {
+    $insert = "INSERT INTO files (nome_foto)
+               VALUES ('img/immagini_utenti/$realname_file')";
+    $res = $pdo->query($insert);
+    if(!$res) {
+      echo "errore nella query";
+    } else {
+      $update_foto_user = "(SELECT id FROM files WHERE nome_foto = 'img/immagini_utenti/" . $realname_file . "' ORDER BY id LIMIT 1)";
+      $update_foto = "UPDATE utenti
+                      SET foto = " . $update_foto_user . "
+                      WHERE id = " . $get_id_u . "";
+      $update_foto = $pdo->query($update_foto);
+      header('Location: ../index.php?link=profile');
+    }
   }
 
 } else {
