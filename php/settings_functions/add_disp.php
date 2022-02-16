@@ -29,7 +29,7 @@ if(isset($_SESSION['session_id'])){
     echo "L'user è vuoto";
   } else {
     $pre->execute();
-    header('Location: ../settings.php?msg=ok');
+    header('Location: ../index.php?link=settingsdisp');
   }
   //da definire
 } else {

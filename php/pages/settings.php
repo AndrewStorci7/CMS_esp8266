@@ -1,12 +1,12 @@
 <?php
-session_start();
+//session_start();
 require_once('config.php');
 if(isset($_SESSION['session_id'])){
-  $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+  /*$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
   strval($msg);
   if($msg == 'ok'){
     echo "<script>alert('Dispositivo aggiunto con successo');</script>";
-  }
+  }*/
  ?>
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -34,32 +34,6 @@ if(isset($_SESSION['session_id'])){
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
   </head>
   <body>
-    <header class="header-area">
-        <nav class="navbar navbar-expand-md navbar-dark">
-            <div class="container">
-                <h3 class="navbar_brand titoloHeader">ESP pannell</h3>
-
-                <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#main-nav" id="menu_side">
-                    <span class="menu-icon-bar">Home</span>
-                    <span class="menu-icon-bar">About Me</span>
-                    <span class="menu-icon-bar">Profile</span>
-                    <span class="menu-icon-bar">Contact</span>
-                </button>
-
-                <div id="main-nav" class="collapse navbar-collapse">
-                    <ul class="navbar-nav fixed ml-auto fixed">
-                        <li><a href="../index.html" class="nav-item nav-link">Home</a></li>
-                        <li><a href="index.php" class="nav-item nav-link">Torna al pannello</a></li>
-                        <li class="dropdown">
-                            <a href="javascript:void();" class="nav-item nav-link" data-toggle="dropdown">Profile</a>
-                            <div class="dropdown-menu">
-                                <a href="../access/php/logout.php" class="dropdown-item logoutCss">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     <?php
     $role = isset($_SESSION['session_role']) ? $_SESSION['session_role'] : '2';
     intval($role);
@@ -82,7 +56,7 @@ if(isset($_SESSION['session_id'])){
         $delete = "display: none;";
         break;
     }
-    echo "<div class='container' style='padding-top: 10%; padding-bottom: 10%;'>
+    echo "<div class='container' style='padding-top: 1%; padding-bottom: 10%;'>
             <center><h2 class='titolo_pagdispositivi'>" . $titolo_pag . "</h2></center>";
     $pre = $pdo->query($query);
     while($risultato = $pre->fetch()){
@@ -132,7 +106,6 @@ if(isset($_SESSION['session_id'])){
         </form>
       </div>
     </div>
-   </header>
   </body>
 </html>
 <?php

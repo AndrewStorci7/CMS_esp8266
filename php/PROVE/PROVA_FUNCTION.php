@@ -14,9 +14,9 @@ function arrayBidimensionale($param, $pdo){
     while($fetch_query = $query_eseg->fetch(PDO::FETCH_ASSOC)) {
       $Matrice = ['#' => strval($index++)];
       $Matrice = ['Temp' => strval($fetch_query['temp'])];
-      $Matrice = ['#' => strval($fetch_query['n_disp'])];
-      $Matrice = ['#' => strval($fetch_query['nick'])];
-      $Matrice = ['#' => strval($fetch_query['data_time'])];
+      $Matrice = ['n-disp' => strval($fetch_query['n_disp'])];
+      $Matrice = ['nick' => strval($fetch_query['nick'])];
+      $Matrice = ['data_time' => strval($fetch_query['data_time'])];
     }
   }
   return $Matrice;

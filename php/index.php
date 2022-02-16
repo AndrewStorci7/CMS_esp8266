@@ -3,12 +3,22 @@ session_start();
 require_once('config.php');
 require_once('settings_functions/visualizza_foto.php');
 if(isset($_SESSION['session_id'])){
+  $class = "text-white";
+  $class2 = "text-white";
+  $class3 = "text-white";
+  $class4 = "text-white";
+  $class5 = "text-white";
+
   if(isset($_GET['link']) && $_GET['link'] == 'userdata' || !isset($_GET['link'])){
     $class = 'active';
-    $class2 = 'text-white';
-  } else {
-    $class = 'text-white';
+  } else if(isset($_GET['link']) && $_GET['link'] == 'alluserdata' || !isset($_GET['link'])){
     $class2 = 'active';
+  } else if(isset($_GET['link']) && $_GET['link'] == 'profileallusers' || !isset($_GET['link'])){
+    $class3 = 'active';
+  } else if(isset($_GET['link']) && $_GET['link'] == 'settingsdisp' || !isset($_GET['link'])){
+    $class4 = 'active';
+  } else if(isset($_GET['link']) && $_GET['link'] == 'profile' || !isset($_GET['link'])){
+    $class5 = 'active';
   }
 ?>
 
@@ -61,7 +71,7 @@ if(isset($_SESSION['session_id'])){
                 </a>
               </li>
               <li>
-                <a href="profile.php" class="nav-link text-white" id="alluserdata_navbar">
+                <a href="?link=profileallusers" class="nav-link <?php echo $class3; ?>" id="alluserdata_navbar">
                   <i class="fas fa-users-cog"></i>
                   Profiles users
                 </a>
@@ -70,13 +80,13 @@ if(isset($_SESSION['session_id'])){
               }
                ?>
               <li>
-                <a href="settings.php" class="nav-link text-white" id="settings_navbar">
+                <a href="?link=settingsdisp" class="nav-link <?php echo $class4; ?>" id="settings_navbar">
                   <i class="fas fa-cog"></i>
                   Settings
                 </a>
               </li>
               <li>
-                <a href="profile.php" class="nav-link text-white" id="profile_navbar">
+                <a href="?link=profile" class="nav-link <?php echo $class5; ?>" id="profile_navbar">
                   <img alt="Foto profilo" class="img_fotoprofilo" src="../<?php echo $addres; ?>" width="30px" height="30px">
                   Profile
                 </a>

@@ -14,7 +14,7 @@ switch ($type) {
     $pre = $pdo->prepare($query);
     $pre->bindParam(':n_disp', $n_disp, PDO::PARAM_STR);
     $pre->bindParam(':id_disp', $id_disp, PDO::PARAM_INT);
-    $header = 'Location: ../settings.php';
+    $header = 'Location: ../index.php?link=settingsdisp';
     if((empty($n_disp) || $n_disp == 'undefined') || ($id_disp == 0)){
       echo "<script>alert('Per modificare devi riempire il campo');</script>";
       header($header);
@@ -25,7 +25,7 @@ switch ($type) {
     $nc = isset($_POST['nc']) ? $_POST['nc'] : '';
     $nick = isset($_POST['nick']) ? $_POST['nick'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $header = 'Location: ../profile.php';
+    $header = 'Location: ../index.php?link=profile';
     if($_SESSION['session_role'] == 1){
         $get_id = isset($_GET['id_u']) ? $_GET['id_u'] : '';
         intval($get_id);
@@ -56,7 +56,7 @@ switch ($type) {
       $pre->bindParam(':nc', $nc, PDO::PARAM_STR);
       $pre->bindParam(':nick', $nick, PDO::PARAM_STR);
       $pre->bindParam(':email', $email, PDO::PARAM_STR);
-      
+
       if((empty($nc) || $nc == 'undefined') || (empty($nick) || $nick == 'undefined') || (empty($email) || $email == 'undefined')){
         header($header . "?errormsg=riempireicampi");
       }
