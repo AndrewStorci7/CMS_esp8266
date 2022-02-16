@@ -123,7 +123,7 @@ if(isset($_SESSION['session_id'])){
                         <div class="dropdown-menu">
                             <a href="../index.html" class="dropdown-item">Home</a>
                             <a href="../access/php/logout.php" class="dropdown-item">Logout</a>
-                            <a href="profile.php" class="dropdown-item">Settings</a>
+                            <a href="?link=profile" class="dropdown-item">Settings</a>
                         </div>
                     </li>
                 </ul>
