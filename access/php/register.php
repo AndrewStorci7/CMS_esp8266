@@ -1,17 +1,16 @@
 <?php
 require_once('../../php/config.php');
 
-$error1 = '';
-$error2 = '';
-$error3 = '';
-$error4 = '';
-$error5 = '';
-$error6 = '';
+//if (isset($_POST['register'])) {
 
-if (isset($_POST['register'])) {
     $nc = $_POST['nomecompleto'] ?? '';
     $nick = $_POST['nick'] ?? '';
     $password = $_POST['pw'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $isEmailValid = filter_var(
+        $email,
+        FILTER_VALIDATE_EMAIL
+    );
     $isNickValid = filter_var(
         $nick,
         FILTER_VALIDATE_REGEXP, [
@@ -30,56 +29,61 @@ if (isset($_POST['register'])) {
     );*/
     $pwdLenght = mb_strlen($password);
 
-    if (empty($nick)) {
-        $error1 = '<p class="error">Inserire il nickname</p>';
-        header('Location: ../html/register_form.php');
-    } elseif(empty($password)) {
-        $error2 = '<p class="error">Inserire la password</p>';
-        header('Location: ../html/register_form.php');
+    if(empty($nc)){
+        echo 1;
+    } else if (empty($nick)) {
+        echo 2;
+    } else if (empty($email)) {
+        echo 3;
+    } else if(empty($password)) {
+        echo 4;
     } elseif (false === $isNickValid) {
-        $error3 = '<p class="error">L\'username non è valido</p>';
-        header('Location: ../html/register_form.php');
+        echo 5;
+    } elseif(false === $isEmailValid){
+        echo 10;
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $error4 = '<p class="error">La password deve essere di almeno 8 caratteri</p>';
-        header('Location: ../html/register_form.php');
+        echo 6;
+        //Password corta
     } else {
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $password_hash = md5(md5($password));
+        //echo $password_hash;
 
         $query = "
             SELECT id
             FROM utenti
-            WHERE nick = :nick
-        ";
+            WHERE email = :email OR nick = :nick";
 
         $check = $pdo->prepare($query);
+        $check->bindParam(':email', $email, PDO::PARAM_STR);
         $check->bindParam(':nick', $nick, PDO::PARAM_STR);
         $check->execute();
 
         $user = $check->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($user) > 0) {
-            $error5 = '<p class="error">Nickname già in uso</p>';
-            header('Location: ../html/register_form.php');
+            echo 7;
+            //Nickname o email già in uso
         } else {
             $query = "
-                INSERT INTO utenti(nick, pw, nc)
-                VALUES (:nick, :pw, :nomecompleto)
+                INSERT INTO utenti(nick, email, pw, nc)
+                VALUES (:nick, :email, :pw, :nomecompleto)
             ";
 
             $check = $pdo->prepare($query);
+            $check->bindParam(':email', $email, PDO::PARAM_STR);
             $check->bindParam(':nick', $nick, PDO::PARAM_STR);
             $check->bindParam(':pw', $password_hash, PDO::PARAM_STR);
             $check->bindParam(':nomecompleto', $nc, PDO::PARAM_STR);
             $check->execute();
 
             if ($check->rowCount() > 0) {
-                header('Location: ../html/login_form.php');
+                echo 8;
+                //Registrazione avvenuta
             } else {
-                $error6 = '<p class="error">Problemi con l\'inserimento dei dati</p>';
-                header('Location: ../html/register_form.php');
+                echo 9;
+                //Registrazione non avvenuta
             }
         }
     }
-}
-
-?>
+//}
+ ?>

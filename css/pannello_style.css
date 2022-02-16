@@ -1,3 +1,23 @@
+body{
+  background: white !important;
+}
 .formSearchPannel{
   margini-top: -10px !important;
+}
+.nascondi{
+  display: none !important;
+}
+.mostra{
+  display: block !important;
+}
+.img_fotoprofilo{
+  border-radius: 600px;
+  margin-left: -3px;
+  margin-right: 3px;
+}
+.fix_drop{
+  margin: 2px !important;
+}
+.fix_link{
+  padding: 0px !important; 
 }

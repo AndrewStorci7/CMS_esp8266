@@ -23,6 +23,7 @@ if(($temperatura == null || $temperatura == 'undefined' || $temperatura == "") |
       $result->bindParam(':id_d', $id_d, PDO::PARAM_INT);
       $result->execute();
       $risultato = $result->fetchAll();
+      echo "Dati inseriti";
     }
 }
 

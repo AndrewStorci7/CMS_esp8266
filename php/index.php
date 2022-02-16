@@ -1,7 +1,15 @@
 <?php
 session_start();
 require_once('config.php');
+require_once('settings_functions/visualizza_foto.php');
 if(isset($_SESSION['session_id'])){
+  if(isset($_GET['link']) && $_GET['link'] == 'userdata' || !isset($_GET['link'])){
+    $class = 'active';
+    $class2 = 'text-white';
+  } else {
+    $class = 'text-white';
+    $class2 = 'active';
+  }
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +21,7 @@ if(isset($_SESSION['session_id'])){
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="ESP8266, esp, esp8266, arduino, CMS, pannell, pannello di controllo, control pannell, ARDUINO, WiFi, wifi, Project, progetto, scuola, school">
+    <meta name="keywords" content="ESP8266, esp, esp8266, arduino, CMS, panel, pannello di controllo, control panel, ARDUINO, WiFi, wifi, Project, progetto, scuola, school">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/logo_small_icon_only.ico">
     <!--<link rel="stylesheet" href="cssFontawesome/all.css">-->
@@ -25,45 +33,51 @@ if(isset($_SESSION['session_id'])){
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/2d628bcfce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="../js/script.js"></script>
+    <script type="text/javascript" src="../js/script.js?ts=<?=time()?>&quot"></script>
     <script type="text/javascript" src="../js/dropdown.js"></script>
     <link rel="stylesheet" href="../css/addcss.css?ts=<?=time()?>&quot">
+    <link rel="stylesheet" href="../css/pannello_style.css?ts=<?=time()?>&quot">
   </head>
   <body>
 
     <main style="height:auto;">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100% !important; position: fixed; z-index:9998 ;">
-            <br>
-            <br>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100% !important; position: fixed; z-index:9999 ;">
+            <img src="../img/logo/logo_white_large.png" alt="">
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="?link=userdata" class="nav-link <?php echo $class;?>" id="home_navbar" onclick="paginaSelector(this.id)">
                   <i class="fas fa-home"></i>
-                  Home
+                  Data
+                </a>
+              </li>
+              <?php
+              if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
+               ?>
+              <li>
+                <a href="?link=alluserdata" class="nav-link <?php echo $class2; ?>" id="alluserdata_navbar" onclick="paginaSelector(this.id)">
+                  <i class="fas fa-chart-line"></i>
+                  Users data
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
-                  <i class="far fa-chart-bar"></i>
-                  Datas
+                <a href="profile.php" class="nav-link text-white" id="alluserdata_navbar">
+                  <i class="fas fa-users-cog"></i>
+                  Profiles users
                 </a>
               </li>
+              <?php
+              }
+               ?>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="settings.php" class="nav-link text-white" id="settings_navbar">
                   <i class="fas fa-cog"></i>
                   Settings
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
-                  <i class="fas fa-chart-line"></i>
-                  Users datas
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <!-- INSERIRE LA FOTO PROFILO DELL'UTENTE -->
+                <a href="profile.php" class="nav-link text-white" id="profile_navbar">
+                  <img alt="Foto profilo" class="img_fotoprofilo" src="../<?php echo $addres; ?>" width="30px" height="30px">
                   Profile
                 </a>
               </li>
@@ -75,27 +89,44 @@ if(isset($_SESSION['session_id'])){
           </div>
       </main>
       <header>
-        <div class="container-fluid bg-dark" style="position: fixed !important; padding: 10px; z-index: 9999">
+        <div class="container-fluid bg-dark" style="position: fixed !important; padding: 10px; z-index: 9998">
           <div class="row">
             <div class="col-2">
-              <h3 class="navbar-brand titoloHeader" style="color: #0D6EFD !important; ">Pannello</h3>
             </div>
             <div class="col-9">
               <!-- ricerca -->
               <div class="container">
                   <form class="d-flex formSearchPannel">
-                    <input class="form-control me-2 searchPannel" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2 searchPannel" type="search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                     <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
-                    <!--<a href="#">Altre opzioni <i class="fas fa-sort-down"></i></a>-->
                   </form>
               </div>
             </div>
             <div class="col-1">
-              <!-- Qua ci sarà la foto profilo -->
-              <button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
+              <div id="main-nav">
+                <ul class="fix_drop">
+                    <li class="dropdown">
+                        <a href="#" class="nav-item nav-link fix_link" data-toggle="dropdown">
+                          <img src="../<?php echo $addres; ?>" class="img_fotoprofilo img_link" width="40px" height="40px">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../index.html" class="dropdown-item">Home</a>
+                            <a href="../access/php/logout.php" class="dropdown-item">Logout</a>
+                            <a href="profile.php" class="dropdown-item">Settings</a>
+                        </div>
+                    </li>
+                </ul>
+              </div>
+
+              <!--<button type="button" name="button" onclick="location.href='../access/php/logout.php'" class="btn btn-primary button-logout">
                 <i class="fas fa-sign-out-alt"></i>
-              </button>
+              </button>-->
+
+
+              <!--<button type="button" name="see_graph" id="see_graph" >
+                Vedi grafico
+              </button>-->
             </div>
           </div>
         </div>
@@ -107,12 +138,10 @@ if(isset($_SESSION['session_id'])){
        ?>
       </section>
 
-      <script src='../js/canvas.js' type='text/javascript'></script>
-
   </body>
 </html>
 <?php
 } else {
-  header('Location: ../access/html/login_form.php');
+  header('Location: ../access/html/login_form.html');
 }
  ?>

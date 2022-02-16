@@ -2,28 +2,23 @@
 session_start();
 require_once('../../php/config.php');
 
-$error1 = '';
-$error2 = '';
-$error3 = '';
-
 if (isset($_SESSION['session_id'])) {
-    header('Location: ../../php/index.php');
+    header('Location: ../../php/index.php?link=userdata');
     exit;
 }
 
-if (isset($_POST['login'])) {
+//if (isset($_POST['login'])) {
     $nick = $_POST['nick'] ?? '';
     $password = $_POST['pw'] ?? '';
+    $password_check = md5(md5($password));
 
     if (empty($nick)) {
-        $error1 = '<p class="error">Inserisci l\'username</p>';
-        header('Location: ../html/login_form.php');
+        echo 1;
     } else if(empty($password)) {
-        $error2 = '<p class="error">Inserisci la password</p>';
-        header('Location: ../html/login_form.php');
+        echo 2;
     }else{
         $query = "
-            SELECT nick, pw
+            SELECT nick, pw, ruolo
             FROM utenti
             WHERE nick = :nick
         ";
@@ -35,19 +30,39 @@ if (isset($_POST['login'])) {
 
         $user = $check->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user || password_verify($password, $user['pw']) === false) {
-            $error3 = '<p class="error">Credenziali utente errate</p>';
-            header('Location: ../html/login_form.php');
+        if (!$user || ($user['pw'] !== $password_check)) {
+            echo 3;
         } else {
             session_regenerate_id();
             $_SESSION['session_id'] = session_id();
             $_SESSION['session_user'] = $user['nick'];
+            $_SESSION['session_role'] = $user['ruolo'];
 
-
-            header('Location: ../../php/index.php');
+            echo 4;
+            //header('Location: ../../php/index.php?link=userdata');
             exit;
         }
     }
-}
+//}
 
-?>
+/*$msg = isset($_GET['msg']) ? $_GET['msg'] : "";
+strval($msg);
+$errmsg = "";
+$classerr = "";
+switch ($msg) {
+  case 'err3':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Credenziali errate</p>";
+    $classerr = "is-invalid";
+    break;
+
+  case 'err2':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Inserire la password</p>";
+    $classerr = "is-invalid";
+    break;
+
+  case 'err1':
+    $errmsg = "<p style='color: red; font-size: 12px;'>Inserire il nickname</p>";
+    $classerr = "is-invalid";
+    break;
+}*/
+ ?>

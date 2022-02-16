@@ -1,4 +1,6 @@
 <?php
+// FILE INUTILIZZATO
+// HO PROVATO A CREARE UNA FUNZIONE CHE RICHIAMO PER SCORRERE IL RISULTATO DELLA QUERY
 
 function arrayBidimensionale($param, $pdo){
   $Matrice = $config = ['#', 'Temp', 'n_disp', 'nick', 'data_time'];
