@@ -52,16 +52,13 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
     const tabella = new Array(table);
-    //console.log(tabella);
-    // da finire, forse da cambiare proprio logica,
-    // cercare di utilizzare i dataset
-    for(var i = 0; i < tabella.length; i++){
-        var id_d = [];
-        id_d = tabella[i];
-        console.log(id_d);
-        for(var y = 0; y < id_d.length; y++){
-          console.log("sono entrato");
-        }
 
-    }
+    tabella.forEach(i => {
+      console.log(i);
+      /*i.forEach(y => {
+        console.log(y.temp);
+      });*/
+
+    });
+
 }
