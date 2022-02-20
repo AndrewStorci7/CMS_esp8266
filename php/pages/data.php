@@ -44,7 +44,7 @@ if(isset($_SESSION['session_id'])){
                          ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
                          WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
       $id_chart = "myChart";
-      $script = '<script src="../js/canvas.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
+      $script = '<script src="../js/canvas.js" type="text/javascript"></script>';
       $link_href = "?link=userdata&pagina=";
       break;
     case "alluserdata":
@@ -58,7 +58,7 @@ if(isset($_SESSION['session_id'])){
                 ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
       $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
       $id_chart = "myChartAllData";
-      $script = '<script src="../js/canvas_alldata.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
+      $script = '<script src="../js/canvas_alldata.js" type="text/javascript"></script>';
       $link_href = "?link=alluserdata&pagina=";
       break;
 

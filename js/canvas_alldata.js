@@ -55,9 +55,9 @@ async function getData(){
 
     tabella.forEach(i => {
       console.log(i);
-      /*i.forEach(y => {
-        console.log(y.temp);
-      });*/
+      for(let y = 0; y < i.length; y++){
+        console.log(i[y]);
+      }
 
     });
 
