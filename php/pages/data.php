@@ -61,6 +61,21 @@ if(isset($_SESSION['session_id'])){
       $script = '<script src="../js/canvas_alldata.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
       $link_href = "?link=alluserdata&pagina=";
       break;
+
+    default:
+      $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
+                FROM dati
+                JOIN dispositivi
+                JOIN utenti
+                ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . '" ORDER BY dati.data_time DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
+      $conta_elementi = 'SELECT COUNT(*) AS num_dati
+                         FROM dati JOIN dispositivi JOIN utenti
+                         ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
+                         WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
+      $id_chart = "myChart";
+      $script = '<script src="../js/canvas.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
+      $link_href = "?link=userdata&pagina=";
+      break;
   }
 
   $num_elementi = $pdo->prepare($conta_elementi);
@@ -117,8 +132,12 @@ if(isset($_SESSION['session_id'])){
       if($num_pagine > $pagina){
           echo '<a class="piu" href="' . $link_href . ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
       }
+      echo '</center><br></div>' . $script;
+  } else if($res->rowCount() == 0){
+      echo "<center><p>Non hai dispositivi/o</p></center>";
+      echo "<center><p>Se hai un dispositivo, non hai dati</p></center>";
   }
-  echo '</center><br></div>' . $script;
+
 } else {
   header('Location: ../../access/html/login_form.html');
 }

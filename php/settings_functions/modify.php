@@ -25,9 +25,9 @@ switch ($type) {
     $nc = isset($_POST['nc']) ? $_POST['nc'] : '';
     $nick = isset($_POST['nick']) ? $_POST['nick'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $get_id = isset($_GET['id_u']) ? $_GET['id_u'] : '';
     $header = 'Location: ../index.php?link=profile';
     if($_SESSION['session_role'] == 1){
-        $get_id = isset($_GET['id_u']) ? $_GET['id_u'] : '';
         intval($get_id);
         $user_role = filter_input(INPUT_POST, 'slc_role', FILTER_SANITIZE_STRING);
         $slc_id_role = "(SELECT id FROM ruoli WHERE nome_r = '" . $user_role . "')";
@@ -46,11 +46,11 @@ switch ($type) {
                   WHERE nick = '" . $_SESSION['session_user'] . "'";
         $_SESSION['session_user'] = $nick;
     }
-    $check_nick_exist = "SELECT nick FROM utenti WHERE nick = '" . $nick . "'";
+    $check_nick_exist = "SELECT id, nick FROM utenti WHERE nick = '" . $nick . "'";
     $check_res = $pdo->query($check_nick_exist);
-    $check_fetch = $check_res->fetchAll(PDO::FETCH_ASSOC);
-    if(count($check_fetch) > 0){
-      header($header . '?errormsg=nickesist');
+    $check_fetch = $check_res->fetch();
+    if(count($check_fetch) > 0 && $get_id != $check_fetch['id']){
+      header($header . '&errormsg=nickesist');
     } else {
       $pre = $pdo->prepare($query);
       $pre->bindParam(':nc', $nc, PDO::PARAM_STR);
@@ -58,7 +58,7 @@ switch ($type) {
       $pre->bindParam(':email', $email, PDO::PARAM_STR);
 
       if((empty($nc) || $nc == 'undefined') || (empty($nick) || $nick == 'undefined') || (empty($email) || $email == 'undefined')){
-        header($header . "?errormsg=riempireicampi");
+        header($header . "&errormsg=riempireicampi");
       }
     }
 

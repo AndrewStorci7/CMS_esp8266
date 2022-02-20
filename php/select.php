@@ -27,7 +27,7 @@ if(isset($_SESSION['session_id'])){
       break;
 
     default:
-      echo "Hacker vai via";
+      include_once('pages/data.php');
       break;
   }
 
