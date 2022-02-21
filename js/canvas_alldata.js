@@ -52,17 +52,13 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
     const tabella = new Array(table);
-    //console.log(tabella);
+    console.log(tabella);
 
-    // da finire, forse da cambiare proprio logica,
-    // cercare di utilizzare i dataset
-    for(let i = 0; i < tabella.length; i++){
-        var primo_array = tabella[i];
-        console.log(primo_array);
-        const temp = primo_array['temp'];
-        temperature.push(temp);
-        console.log(temp);
-        const data_time = primo_array['data_time'];
-        ore.push(data_time);
-    }
+    tabella.forEach(i => {
+        console.log(i);
+        i.forEach(y => {
+
+        });
+    });
+
 }

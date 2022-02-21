@@ -10,11 +10,10 @@ if(isset($_SESSION['session_id'])){
 
       $result2 = $pdo->prepare($select_query);
       $result2->execute();
-      while($matrice = $result2->fetchAll(PDO::FETCH_GROUP)){
+      while($matrice = $result2->fetchAll(PDO::FETCH_ASSOC)){
         if($matrice !== null){
-          $json = json_encode($matrice);
+          $json = json_encode($prova);
           echo $json;
-          //$file = file_put_contents("data.json", $json);
         }
       }
 } else {
