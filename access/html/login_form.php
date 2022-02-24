@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once('../../php/config.php');
+if(!isset($_SESSION['session_id'])){
+ ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -84,3 +89,8 @@
       </script>
     </body>
 </html>
+<?php
+} else {
+  header('Location: ../../php/index.php?link=userdata');
+}
+ ?>
