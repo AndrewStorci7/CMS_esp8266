@@ -149,6 +149,15 @@ if(isset($_SESSION['session_id'])){
       </section>
 
   </body>
+  <script type="text/javascript">
+  /*
+    PROVA CHIAMATA ASINCRONA PER
+    CAMBIO DI CONTENUTO PAGINA
+  */
+    $(document).ready(function(){
+      $('')
+    });
+  </script>
 </html>
 <?php
 } else {
