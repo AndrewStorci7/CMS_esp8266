@@ -11,19 +11,14 @@ if(isset($_SESSION['session_id'])){
 
   if(isset($_GET['link']) && $_GET['link'] == 'userdata' || !isset($_GET['link'])){
     $class = 'active';
-    echo 1;
   } else if(isset($_GET['link']) && $_GET['link'] == 'alluserdata' || !isset($_GET['link'])){
     $class2 = 'active';
-    echo 2;
   } else if(isset($_GET['link']) && $_GET['link'] == 'profileallusers' || !isset($_GET['link'])){
     $class3 = 'active';
-    echo 3;
   } else if(isset($_GET['link']) && $_GET['link'] == 'settingsdisp' || !isset($_GET['link'])){
     $class4 = 'active';
-    echo 4;
   } else if(isset($_GET['link']) && $_GET['link'] == 'profile' || !isset($_GET['link'])){
     $class5 = 'active';
-    echo 5;
   }
 ?>
 
@@ -61,8 +56,8 @@ if(isset($_SESSION['session_id'])){
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <!-- href="?link=userdata" -->
-                <a  class="nav-link <?php echo $class;?>" id="home_nav">
+                <!--  -->
+                <a href="?link=userdata" class="nav-link <?php echo $class;?>" id="home_nav">
                   <i class="fas fa-home"></i>
                   Data
                 </a>
@@ -71,15 +66,15 @@ if(isset($_SESSION['session_id'])){
               if(isset($_SESSION['session_role']) && $_SESSION['session_role'] == 1){
                ?>
               <li>
-                <!-- href="?link=alluserdata" -->
-                <a class="nav-link <?php echo $class2; ?>" id="alluserdata_nav">
+                <!--  -->
+                <a href="?link=alluserdata" class="nav-link <?php echo $class2; ?>" id="alluserdata_nav">
                   <i class="fas fa-chart-line"></i>
                   Users data
                 </a>
               </li>
               <li>
-                <!-- href="?link=profileallusers" -->
-                <a class="nav-link <?php echo $class3; ?>" id="alluserprofile_nav">
+                <!--  -->
+                <a href="?link=profileallusers" class="nav-link <?php echo $class3; ?>" id="alluserprofile_nav">
                   <i class="fas fa-users-cog"></i>
                   Profiles users
                 </a>
@@ -88,15 +83,15 @@ if(isset($_SESSION['session_id'])){
               }
                ?>
               <li>
-                <!-- href="?link=settingsdisp" -->
-                <a class="nav-link <?php echo $class4; ?>" id="settings_nav">
+                <!--  -->
+                <a href="?link=settingsdisp" class="nav-link <?php echo $class4; ?>" id="settings_nav">
                   <i class="fas fa-cog"></i>
                   Settings
                 </a>
               </li>
               <li>
-                <!-- href="?link=profile" -->
-                <a class="nav-link <?php echo $class5; ?>" id="profile_nav">
+                <!--  -->
+                <a href="?link=profile" class="nav-link <?php echo $class5; ?>" id="profile_nav">
                   <img alt="Foto profilo" class="img_fotoprofilo" src="../<?php echo $addres; ?>" width="30px" height="30px">
                   Profile
                 </a>
@@ -153,9 +148,9 @@ if(isset($_SESSION['session_id'])){
       </header>
 
       <section class="modificaFix">
-      <?php
-        include_once('select.php');
-       ?>
+        <?php
+          include_once('select.php');
+        ?>
       </section>
 
   </body>
@@ -164,23 +159,8 @@ if(isset($_SESSION['session_id'])){
     PROVA CHIAMATA ASINCRONA PER
     CAMBIO DI CONTENUTO PAGINA
   */
-    $(document).ready(function(){
-      $('#home_nav').click(function(){ var link = 'userdata'; });
-      $('#alluserdata_nav').click(function(){ var link = 'alluserdata'; });
-      $('#alluserprofile_nav').click(function(){ var link = 'profileallusers'; });
-      $('#settings_nav').click(function(){ var link = 'settingsdisp'; });
-      $('#profile_nav').click(function(){ var link = 'profile'; });
-      $.get('index.php', {link:link}, function(resp){
-        if(resp == 1)
-          console.log(1);
-        else if(resp == 2)
-          console.log(2);
-        else if(resp == 3)
-          console.log(3);
+  
 
-        }
-      });
-    });
   </script>
 </html>
 <?php
