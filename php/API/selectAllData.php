@@ -8,14 +8,14 @@ if(isset($_SESSION['session_id'])){
                        ON dati.id_d = dispositivi.id_disp
                        ORDER BY dati.id_d DESC";
 
-      $result2 = $pdo->prepare($select_query);
-      $result2->execute();
-      while($matrice = $result2->fetchAll(PDO::FETCH_GROUP)){
-        if($matrice !== null){
-          $json = json_encode($matrice);
-          echo $json;
-          //$file = file_put_contents("data.json", $json);
+      $result2 = $pdo->query($select_query);
+      $array = array();
+      $index = 0;
+      while($matrice = $result2->fetch()){
+        for($i = 0; $i < count($matrice); $i++){
+          echo $index . '<br>';
         }
+        $index++;
       }
 } else {
   echo "Non sei loggato";

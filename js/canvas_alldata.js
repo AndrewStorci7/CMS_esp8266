@@ -52,11 +52,20 @@ async function getData(){
     JSON.stringify(resp);
     const table = JSON.parse(resp);
     const tabella = new Array(table);
-    //console.log(tabella);
+    var id_array = new Array();
+    for(let i = 0; i < tabella.length; i++){
+      //console.log(tabella[i]);
+      for(let y = 0; y < tabella[i].length; y++){
+        if(y == tabella[i][y]['id_d']){
+          id_array[y] = tabella[i][y]['id_d'];
+          console.log(id_array[y]);
+        }
+      }
+    }
 
     // da finire, forse da cambiare proprio logica,
     // cercare di utilizzare i dataset
-    for(let i = 0; i < tabella.length; i++){
+    /*for(let i = 0; i < table.length; i++){
         var primo_array = tabella[i];
         console.log(primo_array);
         const temp = primo_array['temp'];
@@ -64,5 +73,5 @@ async function getData(){
         console.log(temp);
         const data_time = primo_array['data_time'];
         ore.push(data_time);
-    }
+    }*/
 }

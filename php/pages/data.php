@@ -44,7 +44,7 @@ if(isset($_SESSION['session_id'])){
                          ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
                          WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
       $id_chart = "myChart";
-      $script = '<script src="../js/canvas.js" type="text/javascript"></script>';
+      $script = '<script src="../js/canvas.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
       $link_href = "?link=userdata&pagina=";
       break;
     case "alluserdata":
