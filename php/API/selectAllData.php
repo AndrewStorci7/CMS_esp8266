@@ -12,10 +12,14 @@ if(isset($_SESSION['session_id'])){
       $array = array();
       $index = 0;
       while($matrice = $result2->fetch()){
-        for($i = 0; $i < count($matrice); $i++){
+        if($matrice !== null){
+          $json = json_encode($matrice);
+          echo $json;
+        }
+        /*for($i = 0; $i < count($matrice); $i++){
           echo $index . '<br>';
         }
-        $index++;
+        $index++;*/
       }
 } else {
   echo "Non sei loggato";

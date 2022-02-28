@@ -8,8 +8,8 @@ if (isset($_SESSION['session_id'])) {
 }
 
 //if (isset($_POST['login'])) {
-    $nick = $_POST['nick'] ?? '';
-    $password = $_POST['pw'] ?? '';
+    $nick = isset($_POST['nick']) ? $_POST['nick'] : '';
+    $password = isset($_POST['pw']) ? $_POST['pw'] : '';
     $password_check = md5(md5($password));
 
     if (empty($nick)) {
