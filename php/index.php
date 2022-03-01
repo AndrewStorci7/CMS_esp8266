@@ -112,8 +112,8 @@ if(isset($_SESSION['session_id'])){
               <!-- ricerca -->
               <div class="container">
                   <form class="d-flex formSearchPannel">
-                    <input class="form-control me-2 searchPannel" type="search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                    <input class="form-control me-2 searchPannel" type="search" id="input-search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
+                    <button class="btn btn-outline-success" id="btn-search"><i class="fas fa-search"></i></button>
                     <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
                   </form>
               </div>
@@ -155,12 +155,12 @@ if(isset($_SESSION['session_id'])){
 
   </body>
   <script type="text/javascript">
-  /*
-    PROVA CHIAMATA ASINCRONA PER
-    CAMBIO DI CONTENUTO PAGINA
-  */
-  
-
+    $('#btn-search').click(function(){
+      var data_search = $('#input-search').val();
+      $.post('/pages/search.php', {inputsearch: data_search}, function(resp){
+        
+      });
+    });
   </script>
 </html>
 <?php
