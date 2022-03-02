@@ -8,22 +8,16 @@ if(isset($_SESSION['session_id'])){
       $pagina=1;
   }
 
-/*
-  if(isset($_POST['nome'])){
-      $nomecercato=$_POST['nome'];
-  }
-  if($cognomecercato!=''){
+  $data_search = isset($_POST['inputsearch']) ? $_POST['inputsearch'] : '';
+  /*if($cognomecercato!=''){
       if($nomecercato!=''){
           $condizione.='AND';
       }else{
           $condizione.='WHERE';
       }
       $condizione= ' Cognome="'.$cognomecercato.'"';
-  }
-  if($nomecercato!=''){
-      $condizione= 'WHERE Nome="'. $nomecercato . '"';
-  }
-  */
+  }*/
+
 
   $link = isset($_GET['link']) ? $_GET['link'] : 'userdata';
   $link_cast = strval($link);
@@ -34,11 +28,15 @@ if(isset($_SESSION['session_id'])){
     /*
       USER LOGGED IN DATA
     */
+      if($data_search!=''){
+        $condizione = 'AND temp = '. $data_search;
+        $condizione = floatval($condizione);
+      }
       $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
                 FROM dati
                 JOIN dispositivi
                 JOIN utenti
-                ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . '" ORDER BY dati.data_time DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
+                ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . ' ' . $condizione . '" ORDER BY dati.data_time DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
       $conta_elementi = 'SELECT COUNT(*) AS num_dati
                          FROM dati JOIN dispositivi JOIN utenti
                          ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
@@ -51,11 +49,15 @@ if(isset($_SESSION['session_id'])){
     /*
       ALL USER DATA
     */
+      if($data_search!=''){
+        $condizione = 'WHERE temp = '. $data_search;
+        $condizione = floatval($condizione);
+      }
       $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
                 FROM dati
                 JOIN dispositivi
                 JOIN utenti
-                ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ORDER BY dati.id DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
+                ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id ' . $condizione . ' GROUP BY dati.id_d DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
       $conta_elementi = 'SELECT COUNT(*) AS num_dati FROM dati';
       $id_chart = "myChartAllData";
       $script = '<script src="../js/canvas_alldata.js" type="text/javascript"></script>';
@@ -69,6 +71,7 @@ if(isset($_SESSION['session_id'])){
   $num_pagine = $riga['num_dati'] / $elementi_da_stampare;
 
   $res = $pdo->prepare($query);
+  //$check = $res->bindParam('');
   $res->execute();
 
   $index = 0;

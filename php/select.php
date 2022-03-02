@@ -5,6 +5,7 @@ if(isset($_SESSION['session_id'])){
 
   $get = isset($_GET['link']) ? $_GET['link'] : "userdata";
   $link = strval($get);
+  $resp_json = '';
   switch ($link) {
     case "userdata":
       include_once('pages/data.php');

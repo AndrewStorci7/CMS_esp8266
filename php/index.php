@@ -146,7 +146,12 @@ if(isset($_SESSION['session_id'])){
           </div>
         </div>
       </header>
+      <section id="tabella_search">
+        <center><p id="msg_ajax" style="font-size: 23px;"></p></center>
+        <table id="table-ajax">
 
+        </table>
+      </section>
       <section class="modificaFix">
         <?php
           include_once('select.php');
@@ -157,9 +162,16 @@ if(isset($_SESSION['session_id'])){
   <script type="text/javascript">
     $('#btn-search').click(function(){
       var data_search = $('#input-search').val();
-      $.post('/pages/search.php', {inputsearch: data_search}, function(resp){
-        
-      });
+      $.post('pages/search.php', {inputsearch: data_search}, function(resp){
+        document.getElementById('table-ajax').innerHTML = "<tr><th>#</th><th>Temp</th><th>N_disp</th><th>Nick</th><th>Data Time</th></tr>";
+        for(let i = 0; i < resp.length; i++){
+          if(resp.length > 0){
+            document.getElementById('table-ajax').innerHTML += '<tr><td>' + resp[i].id + '</td><td>' + resp[i].temp + '</td><td>' + resp[i].n_disp + '</td><td>' + resp[i].nick + '</td><td>' + resp[i].data_time + '</td></tr>';
+          } else {
+            $('#msg_ajax').text('Nessun dato trovato');
+          }
+        }
+      }, 'json');
     });
   </script>
 </html>
