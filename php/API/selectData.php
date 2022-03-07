@@ -13,9 +13,9 @@ if(isset($_SESSION['session_id'])){
     /*if($data_search != null || $data_search != '')
       $cond = ' WHERE temp = ' . $data_search_parse;
     else
-      $cond = '';*/
+      $cond = '';
 
-    /*if($cognomecercato!=''){
+    if($cognomecercato!=''){
         if($nomecercato!=''){
             $condizione.='AND';
         }else{
@@ -91,52 +91,7 @@ if(isset($_SESSION['session_id'])){
 
       $i++;
     }
-    /*if($res->rowCount() > 0){
-        echo "
-        <div class='row' style='width: 90% !important; height: auto !important;'>
-          <center>
-            <canvas id='". $id_chart ."'></canvas>
-          </center>
-        </div>
-        <div class='row' style='margin-top: 40px; margin-right: 10%;'>
-          <div class='container'>
-            <center><h2>Tabella dei dati delle temperature</h2></center>
-              <table class='table' style='margin-left: 20px; heigth: 700px;'>
-                <thead class='table-dark'>
-                  <tr>
-                    <th>#</th>
-                    <th>Temperatura</th>
-                    <th>Nome disp</th>
-                    <th>Nickname User</th>
-                    <th>Data e ora</th>
-                  </tr>
-                </thead><tbody>";
 
-        while($risultato = $res->fetch(PDO::FETCH_ASSOC)) {
-            $index++;
-            $temp = $risultato['temp'];
-            $n_disp = $risultato['n_disp'];
-            $nick = $risultato['nick'];
-            $data_time = $risultato['data_time'];
-
-            echo '<tr>
-            <td>' . $index . '</td>
-            <td>' . $temp . '</td>
-            <td>' . $n_disp . '</td>
-            <td>' . $nick . '</td>
-            <td>' . $data_time . '</td>
-            </tr>';
-        }
-        echo '</tbody></table></div></div>';
-        echo '<div id="tabelladati" class="row pagine"><br><center>';
-
-        if($pagina > 1){
-          echo ' <a class="meno" href="' . $link_href . ($pagina-1) . '#tabelladati"> << '.($pagina-1).' Pagina precedente </a>';
-        }
-        if($num_pagine > $pagina){
-            echo '<a class="piu" href="' . $link_href . ($pagina+1) . '#tabelladati">Pagina successiva '.($pagina+1).'>> </a>';
-        }
-    }*/
     $json = json_encode($array);
     header('Content-Type: application/json');
     echo $json;
