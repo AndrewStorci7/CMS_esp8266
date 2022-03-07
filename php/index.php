@@ -113,7 +113,7 @@ if(isset($_SESSION['session_id'])){
               <div class="container">
                   <form class="d-flex formSearchPannel">
                     <input class="form-control me-2 searchPannel" type="search" id="input-search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
-                    <button class="btn btn-outline-success" id="btn-search"><i class="fas fa-search"></i></button>
+                    <a href="javascript:void(0);" class="btn btn-outline-success" id="btn-search"><i class="fas fa-search"></i></a>
                     <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
                   </form>
               </div>
@@ -146,12 +146,6 @@ if(isset($_SESSION['session_id'])){
           </div>
         </div>
       </header>
-      <section id="tabella_search">
-        <center><p id="msg_ajax" style="font-size: 23px;"></p></center>
-        <table id="table-ajax">
-
-        </table>
-      </section>
       <section class="modificaFix">
         <?php
           include_once('select.php');
@@ -159,21 +153,6 @@ if(isset($_SESSION['session_id'])){
       </section>
 
   </body>
-  <script type="text/javascript">
-    $('#btn-search').click(function(){
-      var data_search = $('#input-search').val();
-      $.post('pages/search.php', {inputsearch: data_search}, function(resp){
-        document.getElementById('table-ajax').innerHTML = "<tr><th>#</th><th>Temp</th><th>N_disp</th><th>Nick</th><th>Data Time</th></tr>";
-        for(let i = 0; i < resp.length; i++){
-          if(resp.length > 0){
-            document.getElementById('table-ajax').innerHTML += '<tr><td>' + resp[i].id + '</td><td>' + resp[i].temp + '</td><td>' + resp[i].n_disp + '</td><td>' + resp[i].nick + '</td><td>' + resp[i].data_time + '</td></tr>';
-          } else {
-            $('#msg_ajax').text('Nessun dato trovato');
-          }
-        }
-      }, 'json');
-    });
-  </script>
 </html>
 <?php
 } else {

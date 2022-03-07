@@ -1,13 +1,4 @@
 <?php
-/*$host = "127.0.0.1";
-$user_db = "root";
-$pw_db = "";
-$db_name = "as_proj_esp8266";
-
-$con = new mysqli($host, $user_db, $pw_db, $db_name);
-if($conn->connect_errno)
-    die("Connessione fallita: " . $conn->connect_errno);
-*/
 $config = [
     'db_engine' => 'mysql',
     'db_host' => '127.0.0.1',
@@ -28,6 +19,4 @@ try {
 } catch (PDOException $e) {
     exit("Impossibile connettersi al database: " . $e->getMessage());
 }
-
-//header("Location: ../index.php");
 ?>
