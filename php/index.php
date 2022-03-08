@@ -111,11 +111,9 @@ if(isset($_SESSION['session_id'])){
             <div class="col-9">
               <!-- ricerca -->
               <div class="container">
-                  <form class="d-flex formSearchPannel">
-                    <input class="form-control me-2 searchPannel" type="search" id="input-search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
-                    <a href="javascript:void(0);" class="btn btn-outline-success" id="btn-search"><i class="fas fa-search"></i></a>
-                    <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
-                  </form>
+                <input class="form-control me-2 searchPannel" type="search" id="input-search" placeholder="Cerca un dato, nickname, data ..." aria-label="Search">
+                <a href="javascript:void(0);" class="btn btn-outline-success" id="btn-search"><i class="fas fa-search"></i></a>
+                <!-- al click scenderà un div che permetterà di scegliere altre opzioni per la ricerca -->
               </div>
             </div>
             <div class="col-1">

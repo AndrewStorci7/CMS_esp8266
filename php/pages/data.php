@@ -1,10 +1,4 @@
- <!DOCTYPE html>
- <html lang="it" dir="ltr">
-   <head>
-     <meta charset="utf-8">
-     <title></title>
-   </head>
-   <body>
+
      <div class='row' style='width: 90% !important; height: auto !important;'>
        <center>
          <canvas id="myChart"></canvas>
@@ -16,14 +10,14 @@
 
      </table>
      <script type="text/javascript">
-       $('#btn-search').submit(function(){
-         //window.location.assign("?link=userdata");
+       $('#btn-search').click(function(){
          var data_search = $('#input-search').val();
          $.post('API/selectData.php', {inputsearch: data_search}, funzioneResp, 'json');
        });
        function funzioneResp(resp){
          if(resp.length > 0){
            document.getElementById("table-ajax").innerHTML = '<tr><th>#</th><th>Temperatura</th><th>Nome Disp</th><th>Nick</th><th>Data Time</th></tr>';
+           document.getElementById("msg_ajax").innerHTML = "";
            for(let i = 0; i < resp.length; i++){
              document.getElementById("table-ajax").innerHTML += '<tr><td>' + resp[i].id + '</td><td>' + resp[i].temp + '</td><td>' + resp[i].n_disp + '</td><td>' + resp[i].nick + '</td><td>' + resp[i].data_time + '</td></tr>';
            }
@@ -43,5 +37,3 @@
          }
        }*/
      </script>
-   </body>
- </html>

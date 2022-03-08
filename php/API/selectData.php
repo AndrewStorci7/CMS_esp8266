@@ -8,8 +8,9 @@ if(isset($_SESSION['session_id'])){
         $pagina=1;
     }
 
-    $data_search = isset($_POST['inputsearch']) ? $_POST['inputsearch'] : '';
+    $data_search = isset($_POST['inputsearch']) ? $_POST['inputsearch'] : "";
     $data_search_parse = floatval($data_search);
+    //$condizione = isset($condizione) ? $condizione : "";
     /*if($data_search != null || $data_search != '')
       $cond = ' WHERE temp = ' . $data_search_parse;
     else
@@ -34,18 +35,20 @@ if(isset($_SESSION['session_id'])){
       /*
         USER LOGGED IN DATA
       */
-        if($data_search!=''){
+        if($data_search !== "")
           $condizione = ' AND dati.temp = '. $data_search_parse;
-        }
+        else
+          $condizione = '';
+
         $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
                   FROM dati
                   JOIN dispositivi
                   JOIN utenti
-                  ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . $condizione . '" ORDER BY dati.data_time DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
+                  ON dati.id_d = dispositivi.id_disp AND dispositivi.id_u = utenti.id WHERE utenti.nick="' . $_SESSION['session_user'] . '" ' . $condizione . ' ORDER BY dati.data_time DESC LIMIT ' . ($pagina-1) * $elementi_da_stampare . ',' . $elementi_da_stampare . ';';
         $conta_elementi = 'SELECT COUNT(*) AS num_dati
                            FROM dati JOIN dispositivi JOIN utenti
                            ON dati.id_d = dispositivi.id_disp AND utenti.id = dispositivi.id_u
-                           WHERE utenti.nick = "' . $_SESSION['session_user'] . '"';
+                           WHERE utenti.nick = "' . $_SESSION['session_user'] . '"' . $condizione;
         $id_chart = "myChart";
         $script = '<script src="../../js/canvas.js?ts=<?=time()?>&quot" type="text/javascript"></script>';
         $link_href = "?link=userdata&pagina=";
@@ -54,9 +57,11 @@ if(isset($_SESSION['session_id'])){
       /*
         ALL USER DATA
       */
-        if($data_search!=''){
+        if($data_search !== "")
           $condizione = ' WHERE dati.temp = '. $data_search_parse;
-        }
+        else
+          $condizione = '';
+
         $query = 'SELECT dati.temp, dispositivi.n_disp, utenti.nick, dati.data_time
                   FROM dati
                   JOIN dispositivi
