@@ -21,6 +21,7 @@
            for(let i = 0; i < resp.length; i++){
              document.getElementById("table-ajax").innerHTML += '<tr><td>' + resp[i].id + '</td><td>' + resp[i].temp + '</td><td>' + resp[i].n_disp + '</td><td>' + resp[i].nick + '</td><td>' + resp[i].data_time + '</td></tr>';
            }
+           //document.getElementsById('className').innerHTML = 
          } else {
            document.getElementById("table-ajax").innerHTML = "";
            document.getElementById("msg_ajax").innerHTML = "Nessun dato trovato";
