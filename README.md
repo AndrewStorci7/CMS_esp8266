@@ -6,5 +6,5 @@ Control Managment System for data received from the [**ESP8266**](https://it.wik
   - password: **123456789**
   
 ## History of the project
-This project was created to be able to monitor the temperature in a certain place. Sensed temperature data is sent via HTTP, from the arduino, to an API on the server for each arudino is connected to the API.
+This project was created to be able to monitor the temperature in a certain place. Sensed temperature data is sent via HTTP, from the arduino, to an API on the server for each arduino is connected to the API.
 
